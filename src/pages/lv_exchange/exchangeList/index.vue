@@ -42,7 +42,7 @@
       <div class="Button">
         <router-link
           v-auth="['product-product-save']"
-          :to="'/admin/lv_product/add_product'"
+          :to="'/admin/lv_exchange/add_exchange'"
           ><Button type="primary" class="bnt mr15" icon="md-add"
             >添加景点</Button
           ></router-link
@@ -172,9 +172,9 @@ import {
   productShowApi,
   productUnshowApi,
   storeProductApi,
-} from "@/api/lv_product";
+} from "@/api/lv_exchange";
 export default {
-  name: "product_productList",
+  name: "lv_exchange_exchangeList",
   components: { expandRow, attribute, taoBao, goodsDetail },
   computed: {
     ...mapState("userLevel", ["categoryId"]),
@@ -293,14 +293,14 @@ export default {
   },
   watch: {
     $route() {
-      if (this.$route.fullPath === "/admin/product/product_list?type=5") {
+      if (this.$route.fullPath === "/admin/lv_exchange/exchange_list?type=5") {
         this.getPath();
       }
     },
   },
   created() {},
   activated() {
-    if (this.$route.fullPath === "/admin/product/product_list?type=5") {
+    if (this.$route.fullPath === "/admin/lv_exchange/exchange_list?type=5") {
       this.getPath();
     } else {
       this.getDataList();
@@ -445,7 +445,7 @@ export default {
     // 复制淘宝
     onCopy() {
       this.$router.push({
-        path: "/admin/product/add_product",
+        path: "/admin/lv_exchange/add_exchange",
         query: { type: -1 },
       });
       // this.modals = true
@@ -556,14 +556,14 @@ export default {
     },
     // 编辑
     edit(row) {
-      this.$router.push({ path: "/admin/lv_product/add_product/" + row.id });
+      this.$router.push({ path: "/admin/lv_product/add_exchange/" + row.id });
     },
     // 确认
     del(row, tit, num) {
       let delfromData = {
         title: tit,
         num: num,
-        url: `lv_product/product/${row.id}`,
+        url: `lv_exchange/exchange/${row.id}`,
         method: "DELETE",
         ids: "",
         un: 1,

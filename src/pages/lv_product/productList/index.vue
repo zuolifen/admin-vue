@@ -206,22 +206,22 @@ export default {
       treeSelect: [],
       loading: false,
       columns: [
-        {
-          type: "expand",
-          width: 50,
-          render: (h, params) => {
-            return h(expandRow, {
-              props: {
-                row: params.row,
-              },
-            });
-          },
-        },
-        {
-          type: "selection",
-          width: 60,
-          align: "center",
-        },
+        // {
+        //   type: "expand",
+        //   width: 50,
+        //   render: (h, params) => {
+        //     return h(expandRow, {
+        //       props: {
+        //         row: params.row,
+        //       },
+        //     });
+        //   },
+        // },
+        // {
+        //   type: "selection",
+        //   width: 60,
+        //   align: "center",
+        // },
         {
           title: "景点ID",
           key: "id",

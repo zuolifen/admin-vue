@@ -2,11 +2,11 @@
     <div>
         <Row class="expand-row">
             <Col span="8">
-                <span class="expand-key">商品分类：</span>
+                <span class="expand-key">景点分类：</span>
                 <span class="expand-value">{{ row.cate_name }}</span>
             </Col>
             <Col span="8">
-                <span class="expand-key">商品市场价格：</span>
+                <span class="expand-key">景点市场价格：</span>
                 <span class="expand-value">{{ row.ot_price }}</span>
             </Col>
             <Col span="8">

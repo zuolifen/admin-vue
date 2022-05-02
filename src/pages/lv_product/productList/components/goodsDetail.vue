@@ -3,7 +3,7 @@
     <div class="goods_detail_wrapper" style="height: 640px">
       <HappyScroll size="5" resize hide-horizontal>
         <div style="width: 375px">
-          <div class="title-box">商品详情</div>
+          <div class="title-box">景点详情</div>
           <div class="swiper-box">
             <Carousel
               :autoplay="goodsInfo.productInfo.slider_image.length > 1"
@@ -44,7 +44,7 @@
             </div>
           </div>
           <div class="con-box">
-            <div class="title-box">商品介绍</div>
+            <div class="title-box">景点介绍</div>
             <div
               class="content"
               v-html="goodsInfo.productInfo.description"

@@ -2,7 +2,7 @@
     <div>
         <Modal
                 v-model="val"
-                title="商品属性"
+                title="景点属性"
                 width="70%"
                 @on-cancel="cancel"
         >

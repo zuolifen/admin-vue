@@ -2,7 +2,7 @@
   <div class="Box">
     <Card>
       <div>
-        生成的商品默认是没有上架的，请手动上架商品！
+        生成的景点默认是没有上架的，请手动上架景点！
         <a
           href="http://help.crmeb.net/crmeb-v4/1863579"
           v-if="copyConfig.copy_type == 2"
@@ -17,7 +17,7 @@
           ></span
         >
       </div>
-      <div>商品采集设置：设置 > 系统设置 > 第三方接口设置 > 采集商品配置</div>
+      <div>景点采集设置：设置 > 系统设置 > 第三方接口设置 > 采集景点配置</div>
     </Card>
     <Form
       class="formValidate mt20"
@@ -56,16 +56,16 @@
         <div>
           <div v-if="isData">
             <Col span="24" class="">
-              <FormItem label="商品名称：" prop="store_name">
+              <FormItem label="景点名称：" prop="store_name">
                 <Input
                   v-model="formValidate.store_name"
-                  placeholder="请输入商品名称"
+                  placeholder="请输入景点名称"
                 />
               </FormItem>
             </Col>
             <Col span="24">
               <FormItem
-                label="商品简介："
+                label="景点简介："
                 prop="store_info"
                 label-for="store_info"
               >
@@ -73,12 +73,12 @@
                   v-model="formValidate.store_info"
                   type="textarea"
                   :rows="3"
-                  placeholder="请输入商品简介"
+                  placeholder="请输入景点简介"
                 />
               </FormItem>
             </Col>
             <Col span="24">
-              <FormItem label="商品分类：" prop="cate_id">
+              <FormItem label="景点分类：" prop="cate_id">
                 <Select v-model="formValidate.cate_id" multiple>
                   <Option
                     v-for="item in treeSelect"
@@ -91,10 +91,10 @@
               </FormItem>
             </Col>
             <Col v-bind="grid">
-              <FormItem label="商品关键字：" prop="keyword" label-for="keyword">
+              <FormItem label="景点关键字：" prop="keyword" label-for="keyword">
                 <Input
                   v-model="formValidate.keyword"
-                  placeholder="请输入商品关键字"
+                  placeholder="请输入景点关键字"
                 />
               </FormItem>
             </Col>
@@ -142,7 +142,7 @@
             <!--</FormItem>-->
             <!--</Col>-->
             <Col span="24">
-              <FormItem label="商品图：">
+              <FormItem label="景点图：">
                 <div class="pictrueBox">
                   <div class="pictrue" v-if="formValidate.image" v-viewer>
                     <img v-lazy="formValidate.image" />
@@ -151,7 +151,7 @@
               </FormItem>
             </Col>
             <Col span="24">
-              <FormItem label="商品轮播图：">
+              <FormItem label="景点轮播图：">
                 <div class="acea-row" v-viewer>
                   <div
                     class="lunBox mr15"
@@ -266,7 +266,7 @@
             </Col>
             <Col span="24">
               <FormItem
-                label="商品规格："
+                label="景点规格："
                 props="spec_type"
                 label-for="spec_type"
               >
@@ -349,7 +349,7 @@
               </FormItem>
             </Col>
             <Col span="24">
-              <FormItem label="商品详情：">
+              <FormItem label="景点详情：">
                 <vue-ueditor-wrap
                   v-model="formValidate.description"
                   @beforeInit="addCustomDialog"
@@ -381,7 +381,7 @@
       scrollable
       footer-hide
       closable
-      title="上传商品图"
+      title="上传景点图"
       :mask-closable="false"
       :z-index="9999"
     >
@@ -455,7 +455,7 @@ export default {
           minWidth: 95,
         },
         {
-          title: "商品编号",
+          title: "景点编号",
           slot: "bar_code",
           align: "center",
           minWidth: 120,
@@ -505,7 +505,7 @@ export default {
         cate_id: [
           {
             required: true,
-            message: "请选择商品分类",
+            message: "请选择景点分类",
             trigger: "change",
             type: "array",
             min: "1",
@@ -678,7 +678,7 @@ export default {
     checked(item, index) {
       this.formValidate.image = item;
     },
-    // 商品分类；
+    // 景点分类；
     goodsCategory() {
       treeListApi(1)
         .then((res) => {
@@ -740,7 +740,7 @@ export default {
           // this.formValidate.items = [];
           crawlSaveApi(this.formValidate)
             .then((res) => {
-              this.$Message.success("商品默认为不上架状态请手动上架商品!");
+              this.$Message.success("景点默认为不上架状态请手动上架景点!");
               setTimeout(() => {
                 this.modal_loading = false;
               }, 500);
@@ -754,12 +754,12 @@ export default {
             });
         } else {
           if (!this.formValidate.cate_id) {
-            this.$Message.warning("请填写商品分类！");
+            this.$Message.warning("请填写景点分类！");
           }
         }
       });
     },
-    // 点击商品图
+    // 点击景点图
     modalPicTap(tit, index) {
       this.modalPic = true;
       this.isChoice = tit === "dan" ? "单选" : "多选";

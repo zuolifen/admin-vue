@@ -41,36 +41,14 @@
       >
         <!-- 基础信息-->
         <Row :gutter="24" type="flex" v-show="currentTab === '1'">
-          
-          <!-- <Col span="24">
-            <FormItem label="景点类型：" props="is_virtual">
-              <RadioGroup
-                v-model="formValidate.is_virtual"
-                @on-change="changeSpec"
-              >
-                <Radio :label="0" class="radio">普通景点</Radio>
-                <Radio :label="1">虚拟景点</Radio>
-              </RadioGroup>
-            </FormItem>
-          </Col> -->
-          <!-- <Col span="24" v-if="formValidate.virtual_type == 1">
-            <FormItem label="虚拟类型：" props="is_virtual">
-              <RadioGroup
-                v-model="formValidate.virtual_type"
-                @on-change="changeSpec"
-              >
-                <Radio :label="1">卡密</Radio>
-                <Radio :label="2">优惠券</Radio>
-              </RadioGroup>
-            </FormItem>
-          </Col> -->
+      
 
        
           <Col span="24">
-            <FormItem label="景点名称：" prop="store_name">
+            <FormItem label="景点名称：" prop="lvyou_name">
               <Input
                 class="perW20"
-                v-model.trim="formValidate.store_name"
+                v-model.trim="formValidate.lvyou_name"
                 placeholder="请输入景点名称"
               />
             </FormItem>
@@ -80,7 +58,7 @@
             <FormItem label="景点描述：">
               <Input
                 class="perW20"
-                v-model.trim="formValidate.store_info"
+                v-model.trim="formValidate.lvyou_info"
                 type="textarea"
                 placeholder="请输入景点描述"
               />
@@ -88,64 +66,39 @@
           </Col>
           <Col span="24">
             <FormItem label="签到获得积分：">
-              <Input
-                class="perW20"
-                v-model.trim="formValidate.store_info"
-                placeholder="请输入景点描述"
+              <InputNumber
+                v-model="formValidate.integral"
+                :min="0"
+                :max="999999"
               />
             </FormItem>
           </Col>
            <Col span="24">
             <FormItem label="打卡人数：">
-              <Input
-                class="perW20"
-                v-model.trim="formValidate.store_info"
-                placeholder="请输入打卡人数"
+              <InputNumber
+                v-model="formValidate.clock_people"
+                :min="0"
+                :max="999999"
               />
             </FormItem>
           </Col>
-          <!--<Col v-bind="grid2">-->
-          <!--<FormItem label="邮费：">-->
-          <!--<InputNumber v-width="'100%'" v-model="formValidate.postage" placeholder="请输入邮费"  />-->
-          <!--</FormItem>-->
-          <!--</Col>-->
-          <!-- <Col span="24">
-            <FormItem label="景点封面图：" prop="image">
-              <div class="pictrueBox" @click="modalPicTap('dan', 'danFrom')">
-                <div class="pictrue" v-if="formValidate.image">
-                  <img v-lazy="formValidate.image" />
-                  <Input
-                    v-model="formValidate.image"
-                    style="display: none"
-                  ></Input>
-                </div>
-                <div class="upLoad acea-row row-center-wrapper" v-else>
-                  <Input
-                    v-model="formValidate.image"
-                    style="display: none"
-                  ></Input>
-                  <Icon type="ios-camera-outline" size="26" />
-                </div>
-              </div>
-              <div class="tips">(345*345)</div>
-            </FormItem>
-          </Col> -->
+        
            <Col span="24">
               <FormItem label="景点图：">
                 <div
                   class="pictrueBox"
                   @click="modalPicTap('dan', 'danTable', 0)"
                 >
-                  <div class="pictrue" v-if="oneFormValidate[0].pic">
-                    <img v-lazy="oneFormValidate[0].pic" />
+                  <div class="pictrue" v-if="formValidate.image">
+                    <img v-lazy="formValidate.image" />
                     <Input
-                      v-model="oneFormValidate[0].pic"
+                      v-model="formValidate.image"
                       style="display: none"
                     ></Input>
                   </div>
                   <div class="upLoad acea-row row-center-wrapper" v-else>
                     <Input
-                      v-model="oneFormValidate[0].pic"
+                      v-model="formValidate.image"
                       style="display: none"
                     ></Input>
                     <Icon type="ios-camera-outline" size="26" />
@@ -195,17 +148,7 @@
             </FormItem>
           </Col>
          
-        
-
-          <!-- <Col span="24">
-                        <FormItem label="景点标签：" prop="label_id">
-                            <Select v-model="formValidate.label_id" multiple v-width="'50%'">
-                                <Option v-for="item in dataLabel" :value="item.id" :key="item.id">{{ item.label_name }}</Option>
-                            </Select>
-                        </FormItem>
-                    </Col> -->
         </Row>
-        <!-- 规格库存-->
         
         <!-- 景点详情-->
         <Row v-show="currentTab === '2'">
@@ -213,7 +156,7 @@
             <FormItem label="景点详情：">
               <WangEditor
                 style="width: 100%"
-                :content="contents"
+                :content="formValidate.description"
                 @editorContent="getEditorContent"
               ></WangEditor>
             </FormItem>
@@ -454,7 +397,7 @@ import vuedraggable from "vuedraggable";
 import uploadPictures from "@/components/uploadPictures";
 import freightTemplate from "@/components/freightTemplate";
 import couponList from "@/components/couponList";
-import addAttr from "../productAttr/addAttr";
+import addAttr from "../exchangeAttr/addAttr";
 import VueUeditorWrap from "vue-ueditor-wrap";
 import goodsList from "@/components/goodsList/index";
 import taoBao from "./taoBao";
@@ -463,7 +406,6 @@ import { userLabelAddApi } from "@/api/user";
 
 import {
   productInfoApi,
-  treeListApi,
   productAddApi,
   generateAttrApi,
   productGetRuleApi,
@@ -522,7 +464,7 @@ export default {
       upload_type: "", //视频上传类型 1 本地上传 2 3 4 OSS上传
       uploadData: {}, // 上传参数
       header: {},
-
+     
       type: 0,
       modals: false,
       goods_modals: false,
@@ -751,8 +693,11 @@ export default {
       customess: {
         content: [],
       }, //自定义留言内容
-
+      lvyou_name:"",
       formValidate: {
+        clock_people:0,  //打卡人数
+        integral:0, //签到获得积分
+        image:"",
         disk_info: "", //卡密类型
         logistics: ["1"], //选择物流方式
         freight: 2, //运费设置
@@ -763,12 +708,12 @@ export default {
         video_open: false, //视频按钮是否显示
         vip_product: false, //付费会员专属开关
         custom_form: [], //自定义留言
-        store_name: "",
+        lvyou_name: "",  //景点名称
         cate_id: [],
         label_id: [],
         keyword: "",
         unit_name: "",
-        store_info: "",
+        lvyou_info: "",
         image: "",
         recommend_image: "",
         slider_image: [],
@@ -854,7 +799,7 @@ export default {
       picTit: "",
       tableIndex: 0,
       ruleValidate: {
-        store_name: [
+        lvyou_name: [
           { required: true, message: "请输入景点名称", trigger: "blur" },
         ],
         cate_id: [
@@ -980,11 +925,7 @@ export default {
     this.columns = this.columns2.slice(0, 8);
     this.getToken();
 
-    // this.columnsInstall = this.columns2.slice(0, 4).concat(this.columnsInstall);
-    // this.columnsInsta8 = this.columns2.slice(0, 4).concat(this.columnsInsta8);
-  },
-  mounted() {
-    if (this.$route.params.id !== "0" && this.$route.params.id) {
+   if (this.$route.params.id !== "0" && this.$route.params.id) {
       this.getInfo();
     } else if (this.$route.params.id === "0") {
       productCache()
@@ -1026,28 +967,7 @@ export default {
               this.customBtn = true;
             }
             this.virtualbtn(data.virtual_type, 1);
-            if (data.spec_type === 0) {
-              this.manyFormValidate = [];
-            } else {
-              this.createBnt = true;
-              this.oneFormValidate = [
-                {
-                  pic: data.image,
-                  price: 0,
-                  cost: 0,
-                  ot_price: 0,
-                  stock: 0,
-                  bar_code: "",
-                  weight: 0,
-                  volume: 0,
-                  brokerage: 0,
-                  brokerage_two: 0,
-                  vip_price: 0,
-                  virtual_list: [],
-                  coupon_id: 0,
-                },
-              ];
-            }
+ 
             this.spinShow = false;
           }
         })
@@ -1055,17 +975,20 @@ export default {
           this.$Message.error(err.msg);
         });
     }
+  },
+  mounted() {
+    
     if (this.$route.query.type) {
       this.modals = true;
       this.type = this.$route.query.type;
     } else {
       this.type = 0;
     }
-    this.goodsCategory();
-    this.productGetRule();
-    this.productGetTemplate();
+    // this.productGetRule();
+    // this.productGetTemplate();
     // this.userLabel();
     this.uploadType();
+
   },
   methods: {
     activeData(dataLabel) {
@@ -1183,9 +1106,7 @@ export default {
           ];
       }
     },
-    addCate() {
-      this.$modalForm(productCreateApi()).then(() => this.goodsCategory());
-    },
+   
     logisticsBtn(e) {
       this.formValidate.logistics = e;
     },
@@ -1249,61 +1170,7 @@ export default {
       });
     },
     infoData(data) {
-      let cate_id = data.cate_id.map(Number);
-      let label_id = data.label_id.map(Number);
-      this.attrs = data.items || [];
-      let ids = [];
-      data.coupons.map((item) => {
-        ids.push(item.id);
-      });
       this.formValidate = data;
-      this.seletVideo = data.seletVideo;
-      this.contents = data.description;
-      this.couponName = data.coupons;
-      this.formValidate.coupon_ids = ids;
-      this.updateIds = ids;
-      this.dataLabel = data.label_id;
-      this.updateName = data.coupons;
-      this.virtualbtn(data.virtual_type, 1);
-      this.formValidate.logistics = data.logistics || ["1"];
-      this.formValidate.custom_form = data.custom_form || [];
-      if (this.formValidate.custom_form.length != 0) {
-        this.customBtn = true;
-      }
-      this.formValidate.cate_id = cate_id;
-      // this.formValidate.label_id = label_id;
-      if (data.attr) {
-        this.oneFormValidate = [data.attr];
-      }
-      this.formValidate.header = [];
-      this.generate(0);
-      // this.manyFormValidate = data.attrs;
-      this.$set(this, "manyFormValidate", data.attrs);
-      this.spec_type = data.spec_type;
-      this.formValidate.is_virtual = data.is_virtual;
-      this.virtual[data.is_virtual].id = data.is_virtual;
-      if (data.spec_type === 0) {
-        this.manyFormValidate = [];
-      } else {
-        this.createBnt = true;
-        this.oneFormValidate = [
-          {
-            pic: "",
-            price: 0,
-            cost: 0,
-            ot_price: 0,
-            stock: 0,
-            bar_code: "",
-            weight: 0,
-            volume: 0,
-            brokerage: 0,
-            brokerage_two: 0,
-            vip_price: 0,
-            virtual_list: [],
-            coupon_id: 0,
-          },
-        ];
-      }
     },
     //关闭淘宝弹窗并生成数据；
     onClose(data) {
@@ -1831,13 +1698,7 @@ export default {
     },
     // 景点分类；
     goodsCategory() {
-      treeListApi(1)
-        .then((res) => {
-          this.treeSelect = res.data;
-        })
-        .catch((res) => {
-          this.$Message.error(res.msg);
-        });
+      
     },
     // 用户标签
     // userLabel() {
@@ -1874,48 +1735,9 @@ export default {
       that.spinShow = true;
       productInfoApi(that.$route.params.id)
         .then(async (res) => {
-          let data = res.data.productInfo;
-          this.infoData(data);
-          // let cate_id = data.cate_id.map(Number);
-          // let label_id = data.label_id.map(Number);
-          // this.attrs = data.items || [];
-          // let ids = [];
-          // data.coupons.map((item) => {
-          //   ids.push(item.id);
-          // });
-          // that.formValidate = data;
-          // that.couponName = data.coupons;
-          // that.formValidate.coupon_ids = ids;
-          // that.updateIds = ids;
-          // that.updateName = data.coupons;
-          // that.formValidate.cate_id = cate_id;
-          // that.formValidate.label_id = label_id;
-          // that.oneFormValidate = [data.attr];
-          // that.formValidate.header = [];
-          // that.manyFormValidate = data.attrs;
-          // that.generate(0);
-          // that.spec_type = data.spec_type;
-          // if (data.spec_type === 0) {
-          //   that.manyFormValidate = [];
-          // } else {
-          //   that.createBnt = true;
-          //   that.oneFormValidate = [
-          //     {
-          //       pic: data.image,
-          //       price: 0,
-          //       cost: 0,
-          //       ot_price: 0,
-          //       stock: 0,
-          //       bar_code: "",
-          //       weight: 0,
-          //       volume: 0,
-          //       brokerage: 0,
-          //       brokerage_two: 0,
-          //       vip_price: 0,
-          //     },
-          //   ];
-          // }
-          this.spinShow = false;
+          let data =await res.data.productInfo;
+          that.infoData(data);
+          that.spinShow = false;
         })
         .catch((res) => {
           this.spinShow = false;
@@ -1959,7 +1781,7 @@ export default {
           }
           break;
         case "danTable":
-          this.oneFormValidate[this.tableIndex].pic = pc.att_dir;
+          this.formValidate.image = pc.att_dir;
           break;
         case "duopi":
           this.oneFormBatch[this.tableIndex].pic = pc.att_dir;
@@ -1990,63 +1812,16 @@ export default {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.formValidate.type = this.type;
-          if (this.formValidate.spec_type === 0) {
-            this.formValidate.attrs = this.oneFormValidate;
-            this.formValidate.header = [];
-            this.formValidate.items = [];
-            this.formValidate.is_copy = 0;
-          } else {
-            this.formValidate.items = this.attrs;
-            this.formValidate.attrs = this.manyFormValidate;
-            this.formValidate.is_copy = 1;
-          }
-          if (
-            this.formValidate.spec_type === 1 &&
-            this.manyFormValidate.length === 0
-          ) {
-            return this.$Message.warning("景点信息-请点击生成多规格");
-            // return this.$Message.warning('请点击生成规格！');
-          }
+         
           let item = this.formValidate.attrs;
-          if (this.formValidate.is_sub[0] === 1) {
-            for (let i = 0; i < item.length; i++) {
-              if (
-                item[i].brokerage === null ||
-                item[i].brokerage_two === null
-              ) {
-                return this.$Message.error("其他设置- 一二级返佣不能为空");
-              }
-            }
-          } else {
-            for (let i = 0; i < item.length; i++) {
-              if (item[i].vip_price === null) {
-                return this.$Message.error("其他设置-会员价不能为空");
-              }
-            }
-          }
-          if (this.formValidate.is_sub.length === 2) {
-            for (let i = 0; i < item.length; i++) {
-              if (
-                item[i].brokerage === null ||
-                item[i].brokerage_two === null ||
-                item[i].vip_price === null
-              ) {
-                return this.$Message.error(
-                  "其他设置- 一二级返佣和会员价不能为空"
-                );
-              }
-            }
-          }
-          if (this.formValidate.freight == 3 && !this.formValidate.temp_id) {
-            return this.$Message.warning("景点信息-运费模板不能为空");
-          }
+          
           let activeIds = [];
           this.dataLabel.forEach((item) => {
             activeIds.push(item.id);
           });
           this.formValidate.label_id = activeIds;
           this.openSubimit = true;
-          this.formValidate.description = this.formatRichText(this.content);
+          this.formValidate.description = this.formatRichText(this.formValidate.description);
           productAddApi(this.formValidate)
             .then(async (res) => {
               this.openSubimit = false;
@@ -2068,7 +1843,7 @@ export default {
               this.$Message.error(res.msg);
             });
         } else {
-          if (!this.formValidate.store_name) {
+          if (!this.formValidate.lvyou_name) {
             return this.$Message.warning("景点信息-景点名称不能为空");
           } else if (!this.formValidate.cate_id.length) {
             return this.$Message.warning("景点信息-景点分类不能为空");
@@ -2076,17 +1851,11 @@ export default {
             return this.$Message.warning("景点信息-景点单位不能为空");
           } else if (!this.formValidate.slider_image.length) {
             return this.$Message.warning("景点信息-景点轮播图不能为空");
-          } else if (
+          } else {
             !this.formValidate.temp_id &&
             this.formValidate.freight == 3
-          ) {
-            return this.$Message.warning("景点信息-运费模板不能为空");
           }
-          //    if(!this.formValidate.store_name || !this.formValidate.cate_id || !this.formValidate.keyword
-          //    || !this.formValidate.unit_name || !this.formValidate.store_info
-          //        || !this.formValidate.image || !this.formValidate.slider_image){
-          //        this.$Message.warning("请填写完整景点信息！");
-          //    }
+          
         }
       });
     },

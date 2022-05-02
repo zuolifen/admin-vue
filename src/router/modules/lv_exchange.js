@@ -14,46 +14,46 @@ export default {
     auth: ['admin-store-index']
   },
   redirect: {
-    name: `${pre}productList`
+    name: `${pre}exchangeList`
   },
   component: BasicLayout,
   children: [
     {
-      path: 'product_list',
-      name: `${pre}productList`,
+      path: 'lv_exchange_list',
+      name: `${pre}exchangeList`,
       meta: {
         title: '兑换管理',
         auth: ['admin-store-storeProuduct-index'],
         keepAlive: true
       },
-      component: () => import('@/pages/lv_exchange/productList')
+      component: () => import('@/pages/lv_exchange/exchangeList')
     },
     {
-      path: 'add_product/:id?',
-      name: `${pre}productAdd`,
+      path: 'add_exchange/:id?',
+      name: `${pre}exchangeAdd`,
       meta: {
         auth: ['admin-store-storeProuduct-index'],
         title: '兑换添加'
       },
-      component: () => import('@/pages/lv_exchange/productAdd')
+      component: () => import('@/pages/lv_exchange/exchangeAdd')
     },
     {
-      path: 'product_reply/:id?',
-      name: `${pre}productEvaluate`,
+      path: 'exchange_reply/:id?',
+      name: `${pre}exchangeEvaluate`,
       meta: {
         auth: ['admin-store-storeProuduct-index'],
         title: '兑换评论'
       },
-      component: () => import('@/pages/lv_exchange/productReply')
+      component: () => import('@/pages/lv_exchange/exchangeReply')
     },
     {
-      path: 'product_attr',
-      name: `${pre}productAttr`,
+      path: 'exchange_attr',
+      name: `${pre}exchangeAttr`,
       meta: {
         auth: ['admin-store-storeProuduct-index'],
         title: '兑换规格'
       },
-      component: () => import('@/pages/lv_exchange/productAttr')
+      component: () => import('@/pages/lv_exchange/exchangeAttr')
     }
   ]
 }

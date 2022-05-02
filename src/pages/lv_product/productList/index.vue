@@ -167,10 +167,8 @@ import taoBao from "./taoBao";
 import goodsDetail from "./components/goodsDetail.vue";
 
 import {
-  getGoodHeade,
   getGoods,
   PostgoodsIsShow,
-  treeListApi,
   productShowApi,
   productUnshowApi,
   storeProductApi,
@@ -302,8 +300,6 @@ export default {
   },
   created() {},
   activated() {
-    this.goodHeade();
-    this.goodsCategory();
     if (this.$route.fullPath === "/admin/product/product_list?type=5") {
       this.getPath();
     } else {
@@ -361,7 +357,6 @@ export default {
         productShowApi(data)
           .then((res) => {
             this.$Message.success(res.msg);
-            this.goodHeade();
             this.getDataList();
           })
           .catch((res) => {
@@ -381,7 +376,6 @@ export default {
           .then((res) => {
             this.$Message.success(res.msg);
             this.artFrom.page = 1;
-            this.goodHeade();
             this.getDataList();
           })
           .catch((res) => {
@@ -477,26 +471,8 @@ export default {
       this.artFrom.cate_id = value;
       this.getDataList();
     },
-    // 获取景点表单头数量
-    goodHeade() {
-      getGoodHeade()
-        .then((res) => {
-          this.headeNum = res.data.list;
-        })
-        .catch((res) => {
-          this.$Message.error(res.msg);
-        });
-    },
-    // 景点分类；
-    goodsCategory() {
-      treeListApi(1)
-        .then((res) => {
-          this.treeSelect = res.data;
-        })
-        .catch((res) => {
-          this.$Message.error(res.msg);
-        });
-    },
+    
+  
     // 景点列表；
     getDataList() {
       this.loading = true;

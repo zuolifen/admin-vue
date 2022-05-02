@@ -406,7 +406,6 @@ import { userLabelAddApi } from "@/api/user";
 
 import {
   productInfoApi,
-  treeListApi,
   productAddApi,
   generateAttrApi,
   productGetRuleApi,
@@ -694,7 +693,7 @@ export default {
       customess: {
         content: [],
       }, //自定义留言内容
-
+      lvyou_name:"",
       formValidate: {
         clock_people:0,  //打卡人数
         integral:0, //签到获得积分
@@ -926,11 +925,7 @@ export default {
     this.columns = this.columns2.slice(0, 8);
     this.getToken();
 
-    // this.columnsInstall = this.columns2.slice(0, 4).concat(this.columnsInstall);
-    // this.columnsInsta8 = this.columns2.slice(0, 4).concat(this.columnsInsta8);
-  },
-  mounted() {
-    if (this.$route.params.id !== "0" && this.$route.params.id) {
+   if (this.$route.params.id !== "0" && this.$route.params.id) {
       this.getInfo();
     } else if (this.$route.params.id === "0") {
       productCache()
@@ -972,28 +967,7 @@ export default {
               this.customBtn = true;
             }
             this.virtualbtn(data.virtual_type, 1);
-            if (data.spec_type === 0) {
-              this.manyFormValidate = [];
-            } else {
-              this.createBnt = true;
-              this.oneFormValidate = [
-                {
-                  pic: data.image,
-                  price: 0,
-                  cost: 0,
-                  ot_price: 0,
-                  stock: 0,
-                  bar_code: "",
-                  weight: 0,
-                  volume: 0,
-                  brokerage: 0,
-                  brokerage_two: 0,
-                  vip_price: 0,
-                  virtual_list: [],
-                  coupon_id: 0,
-                },
-              ];
-            }
+ 
             this.spinShow = false;
           }
         })
@@ -1001,17 +975,20 @@ export default {
           this.$Message.error(err.msg);
         });
     }
+  },
+  mounted() {
+    
     if (this.$route.query.type) {
       this.modals = true;
       this.type = this.$route.query.type;
     } else {
       this.type = 0;
     }
-    this.goodsCategory();
-    this.productGetRule();
-    this.productGetTemplate();
+    // this.productGetRule();
+    // this.productGetTemplate();
     // this.userLabel();
     this.uploadType();
+
   },
   methods: {
     activeData(dataLabel) {
@@ -1129,9 +1106,7 @@ export default {
           ];
       }
     },
-    addCate() {
-      this.$modalForm(productCreateApi()).then(() => this.goodsCategory());
-    },
+   
     logisticsBtn(e) {
       this.formValidate.logistics = e;
     },
@@ -1195,10 +1170,6 @@ export default {
       });
     },
     infoData(data) {
-      this.formValidate.lvyou_name = data.lvyou_name
-      this.formValidate.lvyou_info = data.lvyou_info
-      this.formValidate.image = data.image
-      this.formValidate.slider_image = data.slider_image
       this.formValidate = data;
     },
     //关闭淘宝弹窗并生成数据；
@@ -1727,13 +1698,7 @@ export default {
     },
     // 景点分类；
     goodsCategory() {
-      treeListApi(1)
-        .then((res) => {
-          this.treeSelect = res.data;
-        })
-        .catch((res) => {
-          this.$Message.error(res.msg);
-        });
+      
     },
     // 用户标签
     // userLabel() {
@@ -1770,12 +1735,12 @@ export default {
       that.spinShow = true;
       productInfoApi(that.$route.params.id)
         .then(async (res) => {
-          let data = res.data.productInfo;
-          this.infoData(data);
-          this.spinShow = false;
+          let data =await res.data.productInfo;
+          that.infoData(data);
+          that.spinShow = false;
         })
         .catch((res) => {
-          // this.spinShow = false;
+          this.spinShow = false;
           this.$Message.error(res.msg);
         });
     },

@@ -15,7 +15,7 @@ import request from '@/libs/request'
  * */
 export function getGoodHeade () {
     return request({
-        url: 'product/product/type_header',
+        url: 'lv_product/product/type_header',
         method: 'get'
     })
 }
@@ -47,7 +47,7 @@ export function getGoods (params) {
  */
  export function productCache() {
     return request({
-        url: 'product/cache',
+        url: 'lv_product/cache',
         method: 'get'
     });
 }
@@ -57,7 +57,7 @@ export function getGoods (params) {
  */
 export function cacheDelete() {
     return request({
-        url: 'product/cache',
+        url: 'lv_product/cache',
         method: 'delete'
     });
 }
@@ -67,7 +67,7 @@ export function cacheDelete() {
  */
 export function PostgoodsIsShow (id, isShow) {
     return request({
-        url: `product/product/set_show/${id}/${isShow}`,
+        url: `lv_product/product/set_show/${id}/${isShow}`,
         method: 'put'
     })
 }
@@ -101,7 +101,7 @@ export function productUnshowApi (data) {
  */
 export function treeListApi (type) {
     return request({
-        url: `product/category/tree/${type}`,
+        url: `lv_product/category/tree/${type}`,
         method: 'get'
     })
 }
@@ -111,7 +111,7 @@ export function treeListApi (type) {
  */
 export function productInfoApi (id) {
     return request({
-        url: `product/product/${id}`,
+        url: `lv_product/product/${id}`,
         method: 'get'
     })
 }
@@ -121,7 +121,7 @@ export function productInfoApi (id) {
  */
 export function productAddApi (data) {
     return request({
-        url: `product/product/${data.id}`,
+        url: `lv_product/product/${data.id}`,
         method: 'POST',
         data
     })
@@ -133,7 +133,7 @@ export function productAddApi (data) {
  */
 export function productListApi (params) {
     return request({
-        url: 'product/category',
+        url: 'lv_product/category',
         method: 'get',
         params
     })
@@ -145,7 +145,7 @@ export function productListApi (params) {
  */
 export function productCreateApi () {
     return request({
-        url: 'product/category/create',
+        url: 'lv_product/category/create',
         method: 'get'
     })
 }
@@ -156,7 +156,7 @@ export function productCreateApi () {
  */
 export function productEditApi (id) {
     return request({
-        url: `product/category/${id}`,
+        url: `lv_product/category/${id}`,
         method: 'get'
     })
 }
@@ -167,7 +167,7 @@ export function productEditApi (id) {
  */
 export function setShowApi (data) {
     return request({
-        url: `product/category/set_show/${data.id}/${data.is_show}`,
+        url: `lv_product/category/set_show/${data.id}/${data.is_show}`,
         method: 'PUT'
     })
 }
@@ -177,7 +177,7 @@ export function setShowApi (data) {
  */
 export function changeListApi (params) {
     return request({
-        url: `product/product/list`,
+        url: `lv_product/product/list`,
         method: 'GET',
         params
     })
@@ -189,7 +189,7 @@ export function changeListApi (params) {
  */
 export function replyListApi (params) {
     return request({
-        url: `product/reply`,
+        url: `lv_product/reply`,
         method: 'get',
         params
     })
@@ -201,7 +201,7 @@ export function replyListApi (params) {
  */
 export function setReplyApi (data, id) {
     return request({
-        url: `product/reply/set_reply/${id}`,
+        url: `lv_product/reply/set_reply/${id}`,
         method: 'PUT',
         data
     })
@@ -212,7 +212,7 @@ export function setReplyApi (data, id) {
  */
 export function copyConfigApi () {
     return request({
-        url: `product/copy_config`,
+        url: `lv_product/copy_config`,
         method: 'get'
     })
 }
@@ -223,7 +223,7 @@ export function copyConfigApi () {
  */
 export function crawlFromApi (data) {
     return request({
-        url: `product/copy`,
+        url: `lv_product/copy`,
         method: 'POST',
         data
     })
@@ -235,7 +235,7 @@ export function crawlFromApi (data) {
  */
 export function crawlSaveApi (data) {
     return request({
-        url: `product/crawl/save`,
+        url: `lv_product/crawl/save`,
         method: 'POST',
         data
     })
@@ -247,7 +247,7 @@ export function crawlSaveApi (data) {
  */
 export function generateAttrApi (data, id, type) {
     return request({
-        url: `product/generate_attr/${id}/${type}`,
+        url: `lv_product/generate_attr/${id}/${type}`,
         method: 'POST',
         data
     })
@@ -259,7 +259,7 @@ export function generateAttrApi (data, id, type) {
  */
 export function ruleListApi (params) {
     return request({
-        url: `product/product/rule`,
+        url: `lv_product/product/rule`,
         method: 'GET',
         params
     })
@@ -272,7 +272,7 @@ export function ruleListApi (params) {
  */
 export function ruleAddApi (data, id) {
     return request({
-        url: `product/product/rule/${id}`,
+        url: `lv_product/product/rule/${id}`,
         method: 'POST',
         data
     })
@@ -284,7 +284,7 @@ export function ruleAddApi (data, id) {
  */
 export function ruleInfoApi (id) {
     return request({
-        url: `product/product/rule/${id}`,
+        url: `lv_product/product/rule/${id}`,
         method: 'get'
     })
 }
@@ -295,7 +295,7 @@ export function ruleInfoApi (id) {
  */
 export function fictitiousReply (id) {
     return request({
-        url: `product/reply/fictitious_reply/${id}`,
+        url: `lv_product/reply/fictitious_reply/${id}`,
         method: 'get'
     })
 }
@@ -305,7 +305,7 @@ export function fictitiousReply (id) {
  */
 export function productGetRuleApi () {
     return request({
-        url: `product/product/get_rule`,
+        url: `lv_product/product/get_rule`,
         method: 'get'
     })
 }
@@ -315,7 +315,7 @@ export function productGetRuleApi () {
  */
 export function productGetTemplateApi () {
     return request({
-        url: `product/product/get_template`,
+        url: `lv_product/product/get_template`,
         method: 'get'
     })
 }
@@ -325,7 +325,7 @@ export function productGetTemplateApi () {
  */
 export function productGetTempKeysApi () {
     return request({
-        url: `product/product/get_temp_keys`,
+        url: `lv_product/product/get_temp_keys`,
         method: 'get'
     })
 }
@@ -346,7 +346,7 @@ export function storeProductApi (data) {
  */
 export function checkActivityApi (id) {
     return request({
-        url: `product/product/check_activity/${id}`,
+        url: `lv_product/product/check_activity/${id}`,
         method: 'get'
     })
 }
@@ -383,7 +383,7 @@ export function uploadType () {
  */
 export function importCard (data) {
     return request({
-        url: 'product/product/import_card',
+        url: 'lv_product/product/import_card',
         method: 'get',
         params: data
     })

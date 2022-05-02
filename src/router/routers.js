@@ -11,6 +11,7 @@
 import index from './modules/index'
 import product from './modules/product'
 import lv_product from './modules/lv_product'
+import lv_goods from './modules/lv_goods'
 import order from './modules/order'
 import user from './modules/user'
 // import echarts from './modules/echarts'
@@ -132,6 +133,7 @@ const frameIn = [
     cms,
     product,
     lv_product,
+    lv_goods,
     marketing,
     order,
     user,

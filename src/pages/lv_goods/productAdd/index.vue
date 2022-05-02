@@ -11,7 +11,7 @@
         <span
           class="ivu-page-header-title mr20"
           style="padding: 0"
-          v-text="$route.params.id ? '编辑景点' : '添加景点'"
+          v-text="$route.params.id ? '编辑商品' : '添加商品'"
         ></span>
       </div>
     </div>
@@ -25,7 +25,7 @@
         ></TabPane>
         <!-- <TabPane label="基础信息" name="1"></TabPane>
         <TabPane label="规格库存" name="2"></TabPane>
-        <TabPane label="景点详情" name="3"></TabPane>
+        <TabPane label="商品详情" name="3"></TabPane>
         <TabPane v-show="formValidate.is_virtual ==0" label="物流设置" name="4"></TabPane>
         <TabPane label="营销设置" name="5"></TabPane>
         <TabPane label="其他设置" name="6"></TabPane> -->
@@ -43,13 +43,13 @@
         <Row :gutter="24" type="flex" v-show="currentTab === '1'">
           
           <!-- <Col span="24">
-            <FormItem label="景点类型：" props="is_virtual">
+            <FormItem label="商品类型：" props="is_virtual">
               <RadioGroup
                 v-model="formValidate.is_virtual"
                 @on-change="changeSpec"
               >
-                <Radio :label="0" class="radio">普通景点</Radio>
-                <Radio :label="1">虚拟景点</Radio>
+                <Radio :label="0" class="radio">普通商品</Radio>
+                <Radio :label="1">虚拟商品</Radio>
               </RadioGroup>
             </FormItem>
           </Col> -->
@@ -67,22 +67,22 @@
 
        
           <Col span="24">
-            <FormItem label="景点名称：" prop="store_name">
+            <FormItem label="商品名称：" prop="store_name">
               <Input
                 class="perW20"
                 v-model.trim="formValidate.store_name"
-                placeholder="请输入景点名称"
+                placeholder="请输入商品名称"
               />
             </FormItem>
           </Col>
 
           <Col span="24">
-            <FormItem label="景点描述：">
+            <FormItem label="商品描述：">
               <Input
                 class="perW20"
                 v-model.trim="formValidate.store_info"
                 type="textarea"
-                placeholder="请输入景点描述"
+                placeholder="请输入商品描述"
               />
             </FormItem>
           </Col>
@@ -91,7 +91,7 @@
               <Input
                 class="perW20"
                 v-model.trim="formValidate.store_info"
-                placeholder="请输入景点描述"
+                placeholder="请输入商品描述"
               />
             </FormItem>
           </Col>
@@ -110,7 +110,7 @@
           <!--</FormItem>-->
           <!--</Col>-->
           <!-- <Col span="24">
-            <FormItem label="景点封面图：" prop="image">
+            <FormItem label="商品封面图：" prop="image">
               <div class="pictrueBox" @click="modalPicTap('dan', 'danFrom')">
                 <div class="pictrue" v-if="formValidate.image">
                   <img v-lazy="formValidate.image" />
@@ -131,7 +131,7 @@
             </FormItem>
           </Col> -->
            <Col span="24">
-              <FormItem label="景点图：">
+              <FormItem label="商品图：">
                 <div
                   class="pictrueBox"
                   @click="modalPicTap('dan', 'danTable', 0)"
@@ -154,7 +154,7 @@
               </FormItem>
             </Col>
           <Col span="24">
-            <FormItem label="景点轮播图：" prop="slider_image">
+            <FormItem label="商品轮播图：" prop="slider_image">
               <div class="acea-row">
                 <div
                   class="pictrue"
@@ -198,7 +198,7 @@
         
 
           <!-- <Col span="24">
-                        <FormItem label="景点标签：" prop="label_id">
+                        <FormItem label="商品标签：" prop="label_id">
                             <Select v-model="formValidate.label_id" multiple v-width="'50%'">
                                 <Option v-for="item in dataLabel" :value="item.id" :key="item.id">{{ item.label_name }}</Option>
                             </Select>
@@ -207,10 +207,10 @@
         </Row>
         <!-- 规格库存-->
         
-        <!-- 景点详情-->
+        <!-- 商品详情-->
         <Row v-show="currentTab === '2'">
           <Col span="16">
-            <FormItem label="景点详情：">
+            <FormItem label="商品详情：">
               <WangEditor
                 style="width: 100%"
                 :content="contents"
@@ -274,7 +274,7 @@
         scrollable
         footer-hide
         closable
-        title="上传景点图"
+        title="上传商品图"
         :mask-closable="false"
         :z-index="1"
       >
@@ -413,7 +413,7 @@
     </Modal>
     <Modal
       v-model="goods_modals"
-      title="景点列表"
+      title="商品列表"
       footerHide
       class="paymentFooter"
       scrollable
@@ -503,14 +503,14 @@ export default {
       // dataLabel:[{"id":4,"value":4,"label_cate":0,"label_name":"啊啊啊","label":"啊啊啊","store_id":0,"type":1,"children":[{"id":10,"store_id":0,"label_cate":4,"label_name":"标签1","type":1,"label":"标签1","value":10},{"id":11,"store_id":0,"label_cate":4,"label_name":"标签2","type":1,"label":"标签2","value":11},{"id":12,"store_id":0,"label_cate":4,"label_name":"标签3","type":1,"label":"标签3","value":12}]},{"id":6,"value":6,"label_cate":0,"label_name":"0000","label":"0000","store_id":0,"type":1,"children":[{"id":13,"store_id":0,"label_cate":6,"label_name":"1111111","type":1,"label":"1111111","value":13},{"id":14,"store_id":0,"label_cate":6,"label_name":"2222222","type":1,"label":"2222222","value":14}]},{"id":5,"value":5,"label_cate":0,"label_name":"kk","label":"kk","store_id":0,"type":1,"children":[]}],
       headTab: [
         { tit: "基础信息", name: "1" },
-        { tit: "景点详情", name: "2" },
+        { tit: "商品详情", name: "2" },
      
       ],
       virtual: [
-        { tit: "普通景点", id: 0, tit2: "物流发货" },
+        { tit: "普通商品", id: 0, tit2: "物流发货" },
         { tit: "卡密/网盘", id: 1, tit2: "自动发货" },
         { tit: "优惠卷", id: 2, tit2: "自动发货" },
-        { tit: "虚拟景点", id: 3, tit2: "虚拟发货" },
+        { tit: "虚拟商品", id: 3, tit2: "虚拟发货" },
       ],
       seletVideo: 0, //选择视频类型
       customBtn: false, //自定义留言开关
@@ -604,7 +604,7 @@ export default {
           minWidth: 95,
         },
         {
-          title: "景点编号",
+          title: "商品编号",
           slot: "bar_code",
           align: "center",
           minWidth: 120,
@@ -661,13 +661,13 @@ export default {
           minWidth: 95,
         },
         {
-          title: "景点编号",
+          title: "商品编号",
           slot: "bar_code",
           align: "center",
           minWidth: 120,
         },
         {
-          title: "虚拟景点",
+          title: "虚拟商品",
           slot: "fictitious",
           align: "center",
           minWidth: 95,
@@ -757,9 +757,9 @@ export default {
         logistics: ["1"], //选择物流方式
         freight: 2, //运费设置
         postage: 0, //设置运费金额
-        recommend: [], //景点推荐
+        recommend: [], //商品推荐
         presale_day: 1, //预售发货时间-结束
-        presale: false, //预售景点开关
+        presale: false, //预售商品开关
         video_open: false, //视频按钮是否显示
         vip_product: false, //付费会员专属开关
         custom_form: [], //自定义留言
@@ -855,35 +855,35 @@ export default {
       tableIndex: 0,
       ruleValidate: {
         store_name: [
-          { required: true, message: "请输入景点名称", trigger: "blur" },
+          { required: true, message: "请输入商品名称", trigger: "blur" },
         ],
         cate_id: [
           {
             required: true,
-            message: "请选择景点分类",
+            message: "请选择商品分类",
             trigger: "change",
             type: "array",
             min: "1",
           },
         ],
         unit_name: [{ required: true, message: "请输入单位", trigger: "blur" }],
-        // image: [{ required: true, message: "请上传景点图", trigger: "change" }],
+        // image: [{ required: true, message: "请上传商品图", trigger: "change" }],
         slider_image: [
           {
             required: true,
-            message: "请上传景点轮播图",
+            message: "请上传商品轮播图",
             type: "array",
             trigger: "change",
           },
         ],
         spec_type: [
-          { required: true, message: "请选择景点规格", trigger: "change" },
+          { required: true, message: "请选择商品规格", trigger: "change" },
         ],
         is_virtual: [
-          { required: true, message: "请选择景点类型", trigger: "change" },
+          { required: true, message: "请选择商品类型", trigger: "change" },
         ],
         selectRule: [
-          { required: true, message: "请选择景点规格属性", trigger: "change" },
+          { required: true, message: "请选择商品规格属性", trigger: "change" },
         ],
         temp_id: [
           {
@@ -1128,7 +1128,7 @@ export default {
           this.headTab = [
             { tit: "基础信息", name: "1" },
             { tit: "规格库存", name: "2" },
-            { tit: "景点详情", name: "3" },
+            { tit: "商品详情", name: "3" },
             { tit: "物流设置", name: "4" },
             { tit: "营销设置", name: "5" },
             { tit: "其他设置", name: "6" },
@@ -1140,7 +1140,7 @@ export default {
           this.headTab = [
             { tit: "基础信息", name: "1" },
             { tit: "规格库存", name: "2" },
-            { tit: "景点详情", name: "3" },
+            { tit: "商品详情", name: "3" },
             // { tit: "物流设置", name: "4" },
             { tit: "营销设置", name: "4" },
             { tit: "其他设置", name: "5" },
@@ -1152,7 +1152,7 @@ export default {
           this.headTab = [
             { tit: "基础信息", name: "1" },
             { tit: "规格库存", name: "2" },
-            { tit: "景点详情", name: "3" },
+            { tit: "商品详情", name: "3" },
             // { tit: "物流设置", name: "4" },
             { tit: "营销设置", name: "4" },
             { tit: "其他设置", name: "5" },
@@ -1164,7 +1164,7 @@ export default {
           this.headTab = [
             { tit: "基础信息", name: "1" },
             { tit: "规格库存", name: "2" },
-            { tit: "景点详情", name: "3" },
+            { tit: "商品详情", name: "3" },
             // { tit: "物流设置", name: "4" },
             { tit: "营销设置", name: "4" },
             { tit: "其他设置", name: "5" },
@@ -1177,7 +1177,7 @@ export default {
           this.headTab = [
             { tit: "基础信息", name: "1" },
             { tit: "规格库存", name: "2" },
-            { tit: "景点详情", name: "3" },
+            { tit: "商品详情", name: "3" },
             { tit: "营销设置", name: "4" },
             { tit: "其他设置", name: "5" },
           ];
@@ -1644,7 +1644,7 @@ export default {
         }
       });
     },
-    // 获取景点属性模板；
+    // 获取商品属性模板；
     productGetRule() {
       productGetRuleApi().then((res) => {
         this.ruleList = res.data;
@@ -1742,7 +1742,7 @@ export default {
           let header = info.header;
           if ([1, 2].includes(this.formValidate.virtual_type)) {
             // let aaa = header.splice(7, 2, {
-            //   title: "虚拟景点",
+            //   title: "虚拟商品",
             //   slot: "fictitious",
             //   align: "center",
             //   minWidth: 95,
@@ -1829,7 +1829,7 @@ export default {
         this.$Message.warning("请添加属性");
       }
     },
-    // 景点分类；
+    // 商品分类；
     goodsCategory() {
       treeListApi(1)
         .then((res) => {
@@ -1935,7 +1935,7 @@ export default {
     changeCancel(msg) {
       this.modalPic = false;
     },
-    // 点击景点图
+    // 点击商品图
     modalPicTap(tit, picTit, index) {
       this.modalPic = true;
       this.isChoice = tit === "dan" ? "单选" : "多选";
@@ -2004,7 +2004,7 @@ export default {
             this.formValidate.spec_type === 1 &&
             this.manyFormValidate.length === 0
           ) {
-            return this.$Message.warning("景点信息-请点击生成多规格");
+            return this.$Message.warning("商品信息-请点击生成多规格");
             // return this.$Message.warning('请点击生成规格！');
           }
           let item = this.formValidate.attrs;
@@ -2038,7 +2038,7 @@ export default {
             }
           }
           if (this.formValidate.freight == 3 && !this.formValidate.temp_id) {
-            return this.$Message.warning("景点信息-运费模板不能为空");
+            return this.$Message.warning("商品信息-运费模板不能为空");
           }
           let activeIds = [];
           this.dataLabel.forEach((item) => {
@@ -2069,23 +2069,23 @@ export default {
             });
         } else {
           if (!this.formValidate.store_name) {
-            return this.$Message.warning("景点信息-景点名称不能为空");
+            return this.$Message.warning("商品信息-商品名称不能为空");
           } else if (!this.formValidate.cate_id.length) {
-            return this.$Message.warning("景点信息-景点分类不能为空");
+            return this.$Message.warning("商品信息-商品分类不能为空");
           } else if (!this.formValidate.unit_name) {
-            return this.$Message.warning("景点信息-景点单位不能为空");
+            return this.$Message.warning("商品信息-商品单位不能为空");
           } else if (!this.formValidate.slider_image.length) {
-            return this.$Message.warning("景点信息-景点轮播图不能为空");
+            return this.$Message.warning("商品信息-商品轮播图不能为空");
           } else if (
             !this.formValidate.temp_id &&
             this.formValidate.freight == 3
           ) {
-            return this.$Message.warning("景点信息-运费模板不能为空");
+            return this.$Message.warning("商品信息-运费模板不能为空");
           }
           //    if(!this.formValidate.store_name || !this.formValidate.cate_id || !this.formValidate.keyword
           //    || !this.formValidate.unit_name || !this.formValidate.store_info
           //        || !this.formValidate.image || !this.formValidate.slider_image){
-          //        this.$Message.warning("请填写完整景点信息！");
+          //        this.$Message.warning("请填写完整商品信息！");
           //    }
         }
       });
@@ -2149,7 +2149,7 @@ export default {
       );
       return newContent;
     },
-    // 景点id
+    // 商品id
     getProductId(row) {
       this.goods_modals = false;
       let arr = this.formValidate.recommend_list.concat(row);

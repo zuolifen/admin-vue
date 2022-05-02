@@ -10,10 +10,10 @@
       >
         <Row type="flex" :gutter="24">
           <!-- <Col v-bind="grid">
-            <FormItem label="景点分类：" label-for="pid">
+            <FormItem label="商品分类：" label-for="pid">
               <Select
                 v-model="artFrom.cate_id"
-                placeholder="请选择景点分类"
+                placeholder="请选择商品分类"
                 clearable
                 @on-change="userSearchs"
               >
@@ -27,11 +27,11 @@
             </FormItem>
           </Col> -->
           <Col v-bind="grid">
-            <FormItem label="景点搜索：" label-for="store_name">
+            <FormItem label="商品搜索：" label-for="store_name">
               <Input
                 search
                 enter-button
-                placeholder="请输入景点名称/关键字/ID"
+                placeholder="请输入商品名称/关键字/ID"
                 v-model="artFrom.store_name"
                 @on-search="userSearchs"
               />
@@ -44,7 +44,7 @@
           v-auth="['product-product-save']"
           :to="'/admin/lv_product/add_product'"
           ><Button type="primary" class="bnt mr15" icon="md-add"
-            >添加景点</Button
+            >添加商品</Button
           ></router-link
         >
         <!-- <Button
@@ -52,7 +52,7 @@
           type="success"
           class="bnt mr15"
           @click="onCopy"
-          >景点采集</Button
+          >商品采集</Button
         > -->
         <!-- <Button
           v-auth="['product-product-product_show']"
@@ -150,7 +150,7 @@
     >
       <tao-bao ref="taobaos" v-if="modals" @on-close="onClose"></tao-bao>
     </Modal>
-    <!-- 景点弹窗 -->
+    <!-- 商品弹窗 -->
     <div v-if="isProductBox">
       <div class="bg" @click="isProductBox = false"></div>
       <goodsDetail :goodsId="goodsId"></goodsDetail>
@@ -223,22 +223,22 @@ export default {
         //   align: "center",
         // },
         {
-          title: "景点ID",
+          title: "商品ID",
           key: "id",
           width: 80,
         },
         {
-          title: "景点图",
+          title: "商品图",
           slot: "image",
           minWidth: 120,
         },
         {
-          title: "景点名称",
+          title: "商品名称",
           key: "lvyou_name",
           minWidth: 250,
         },
         {
-          title: "景点描述",
+          title: "商品描述",
           key: "lvyou_info",
           minWidth: 100,
         },
@@ -353,7 +353,7 @@ export default {
     // 批量上架
     onShelves() {
       if (this.ids.length === 0) {
-        this.$Message.warning("请选择要上架的景点");
+        this.$Message.warning("请选择要上架的商品");
       } else {
         let data = {
           ids: this.ids,
@@ -372,7 +372,7 @@ export default {
     // 批量下架
     onDismount() {
       if (this.ids.length === 0) {
-        this.$Message.warning("请选择要下架的景点");
+        this.$Message.warning("请选择要下架的商品");
       } else {
         let data = {
           ids: this.ids,
@@ -444,7 +444,7 @@ export default {
         }
       }
     },
-    // 添加淘宝景点成功
+    // 添加淘宝商品成功
     onClose() {
       this.modals = false;
     },
@@ -477,7 +477,7 @@ export default {
       this.artFrom.cate_id = value;
       this.getDataList();
     },
-    // 获取景点表单头数量
+    // 获取商品表单头数量
     goodHeade() {
       getGoodHeade()
         .then((res) => {
@@ -487,7 +487,7 @@ export default {
           this.$Message.error(res.msg);
         });
     },
-    // 景点分类；
+    // 商品分类；
     goodsCategory() {
       treeListApi(1)
         .then((res) => {
@@ -497,7 +497,7 @@ export default {
           this.$Message.error(res.msg);
         });
     },
-    // 景点列表；
+    // 商品列表；
     getDataList() {
       this.loading = true;
       this.artFrom.cate_id = this.artFrom.cate_id || "";
@@ -542,9 +542,9 @@ export default {
     // 数据导出；
     exportData: function () {
       let th = [
-        "景点名称",
-        "景点简介",
-        "景点分类",
+        "商品名称",
+        "商品简介",
+        "商品分类",
         "价格",
         "库存",
         "销量",

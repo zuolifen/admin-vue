@@ -14,46 +14,46 @@ export default {
     auth: ['admin-store-index']
   },
   redirect: {
-    name: `${pre}productList`
+    name: `${pre}lv_goods_list`
   },
   component: BasicLayout,
   children: [
     {
-      path: 'product_list',
-      name: `${pre}productList`,
+      path: 'lv_goods_list',
+      name: `${pre}lv_goods_list`,
       meta: {
         title: '商品管理',
         auth: ['admin-store-storeProuduct-index'],
         keepAlive: true
       },
-      component: () => import('@/pages/lv_goods/productList')
+      component: () => import('@/pages/lv_goods/goodsList')
     },
     {
-      path: 'add_product/:id?',
-      name: `${pre}productAdd`,
+      path: 'add_goods/:id?',
+      name: `${pre}goodsAdd`,
       meta: {
         auth: ['admin-store-storeProuduct-index'],
         title: '商品添加'
       },
-      component: () => import('@/pages/lv_goods/productAdd')
+      component: () => import('@/pages/lv_goods/goodsAdd')
     },
     {
-      path: 'product_reply/:id?',
-      name: `${pre}productEvaluate`,
+      path: 'goods_reply/:id?',
+      name: `${pre}goodsEvaluate`,
       meta: {
         auth: ['admin-store-storeProuduct-index'],
         title: '商品评论'
       },
-      component: () => import('@/pages/lv_goods/productReply')
+      component: () => import('@/pages/lv_goods/goodsReply')
     },
     {
-      path: 'product_attr',
-      name: `${pre}productAttr`,
+      path: 'goods_attr',
+      name: `${pre}goodsAttr`,
       meta: {
         auth: ['admin-store-storeProuduct-index'],
         title: '商品规格'
       },
-      component: () => import('@/pages/lv_goods/productAttr')
+      component: () => import('@/pages/lv_goods/goodsAttr')
     }
   ]
 }

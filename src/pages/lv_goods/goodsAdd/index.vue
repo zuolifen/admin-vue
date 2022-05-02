@@ -11,7 +11,7 @@
         <span
           class="ivu-page-header-title mr20"
           style="padding: 0"
-          v-text="$route.params.id ? '编辑商品' : '添加商品'"
+          v-text="$route.params.id ? '编辑景点' : '添加景点'"
         ></span>
       </div>
     </div>
@@ -25,7 +25,7 @@
         ></TabPane>
         <!-- <TabPane label="基础信息" name="1"></TabPane>
         <TabPane label="规格库存" name="2"></TabPane>
-        <TabPane label="商品详情" name="3"></TabPane>
+        <TabPane label="景点详情" name="3"></TabPane>
         <TabPane v-show="formValidate.is_virtual ==0" label="物流设置" name="4"></TabPane>
         <TabPane label="营销设置" name="5"></TabPane>
         <TabPane label="其他设置" name="6"></TabPane> -->
@@ -41,111 +41,64 @@
       >
         <!-- 基础信息-->
         <Row :gutter="24" type="flex" v-show="currentTab === '1'">
-          
-          <!-- <Col span="24">
-            <FormItem label="商品类型：" props="is_virtual">
-              <RadioGroup
-                v-model="formValidate.is_virtual"
-                @on-change="changeSpec"
-              >
-                <Radio :label="0" class="radio">普通商品</Radio>
-                <Radio :label="1">虚拟商品</Radio>
-              </RadioGroup>
-            </FormItem>
-          </Col> -->
-          <!-- <Col span="24" v-if="formValidate.virtual_type == 1">
-            <FormItem label="虚拟类型：" props="is_virtual">
-              <RadioGroup
-                v-model="formValidate.virtual_type"
-                @on-change="changeSpec"
-              >
-                <Radio :label="1">卡密</Radio>
-                <Radio :label="2">优惠券</Radio>
-              </RadioGroup>
-            </FormItem>
-          </Col> -->
+      
 
        
           <Col span="24">
-            <FormItem label="商品名称：" prop="store_name">
+            <FormItem label="景点名称：" prop="lvyou_name">
               <Input
                 class="perW20"
-                v-model.trim="formValidate.store_name"
-                placeholder="请输入商品名称"
+                v-model.trim="formValidate.lvyou_name"
+                placeholder="请输入景点名称"
               />
             </FormItem>
           </Col>
 
           <Col span="24">
-            <FormItem label="商品描述：">
+            <FormItem label="景点描述：">
               <Input
                 class="perW20"
-                v-model.trim="formValidate.store_info"
+                v-model.trim="formValidate.lvyou_info"
                 type="textarea"
-                placeholder="请输入商品描述"
+                placeholder="请输入景点描述"
               />
             </FormItem>
           </Col>
           <Col span="24">
             <FormItem label="签到获得积分：">
-              <Input
-                class="perW20"
-                v-model.trim="formValidate.store_info"
-                placeholder="请输入商品描述"
+              <InputNumber
+                v-model="formValidate.integral"
+                :min="0"
+                :max="999999"
               />
             </FormItem>
           </Col>
            <Col span="24">
             <FormItem label="打卡人数：">
-              <Input
-                class="perW20"
-                v-model.trim="formValidate.store_info"
-                placeholder="请输入打卡人数"
+              <InputNumber
+                v-model="formValidate.clock_people"
+                :min="0"
+                :max="999999"
               />
             </FormItem>
           </Col>
-          <!--<Col v-bind="grid2">-->
-          <!--<FormItem label="邮费：">-->
-          <!--<InputNumber v-width="'100%'" v-model="formValidate.postage" placeholder="请输入邮费"  />-->
-          <!--</FormItem>-->
-          <!--</Col>-->
-          <!-- <Col span="24">
-            <FormItem label="商品封面图：" prop="image">
-              <div class="pictrueBox" @click="modalPicTap('dan', 'danFrom')">
-                <div class="pictrue" v-if="formValidate.image">
-                  <img v-lazy="formValidate.image" />
-                  <Input
-                    v-model="formValidate.image"
-                    style="display: none"
-                  ></Input>
-                </div>
-                <div class="upLoad acea-row row-center-wrapper" v-else>
-                  <Input
-                    v-model="formValidate.image"
-                    style="display: none"
-                  ></Input>
-                  <Icon type="ios-camera-outline" size="26" />
-                </div>
-              </div>
-              <div class="tips">(345*345)</div>
-            </FormItem>
-          </Col> -->
+        
            <Col span="24">
-              <FormItem label="商品图：">
+              <FormItem label="景点图：">
                 <div
                   class="pictrueBox"
                   @click="modalPicTap('dan', 'danTable', 0)"
                 >
-                  <div class="pictrue" v-if="oneFormValidate[0].pic">
-                    <img v-lazy="oneFormValidate[0].pic" />
+                  <div class="pictrue" v-if="formValidate.image">
+                    <img v-lazy="formValidate.image" />
                     <Input
-                      v-model="oneFormValidate[0].pic"
+                      v-model="formValidate.image"
                       style="display: none"
                     ></Input>
                   </div>
                   <div class="upLoad acea-row row-center-wrapper" v-else>
                     <Input
-                      v-model="oneFormValidate[0].pic"
+                      v-model="formValidate.image"
                       style="display: none"
                     ></Input>
                     <Icon type="ios-camera-outline" size="26" />
@@ -154,7 +107,7 @@
               </FormItem>
             </Col>
           <Col span="24">
-            <FormItem label="商品轮播图：" prop="slider_image">
+            <FormItem label="景点轮播图：" prop="slider_image">
               <div class="acea-row">
                 <div
                   class="pictrue"
@@ -195,25 +148,15 @@
             </FormItem>
           </Col>
          
-        
-
-          <!-- <Col span="24">
-                        <FormItem label="商品标签：" prop="label_id">
-                            <Select v-model="formValidate.label_id" multiple v-width="'50%'">
-                                <Option v-for="item in dataLabel" :value="item.id" :key="item.id">{{ item.label_name }}</Option>
-                            </Select>
-                        </FormItem>
-                    </Col> -->
         </Row>
-        <!-- 规格库存-->
         
-        <!-- 商品详情-->
+        <!-- 景点详情-->
         <Row v-show="currentTab === '2'">
           <Col span="16">
-            <FormItem label="商品详情：">
+            <FormItem label="景点详情：">
               <WangEditor
                 style="width: 100%"
-                :content="contents"
+                :content="formValidate.description"
                 @editorContent="getEditorContent"
               ></WangEditor>
             </FormItem>
@@ -274,7 +217,7 @@
         scrollable
         footer-hide
         closable
-        title="上传商品图"
+        title="上传景点图"
         :mask-closable="false"
         :z-index="1"
       >
@@ -413,7 +356,7 @@
     </Modal>
     <Modal
       v-model="goods_modals"
-      title="商品列表"
+      title="景点列表"
       footerHide
       class="paymentFooter"
       scrollable
@@ -454,7 +397,7 @@ import vuedraggable from "vuedraggable";
 import uploadPictures from "@/components/uploadPictures";
 import freightTemplate from "@/components/freightTemplate";
 import couponList from "@/components/couponList";
-import addAttr from "../productAttr/addAttr";
+import addAttr from "../goodsAttr/addAttr";
 import VueUeditorWrap from "vue-ueditor-wrap";
 import goodsList from "@/components/goodsList/index";
 import taoBao from "./taoBao";
@@ -463,7 +406,6 @@ import { userLabelAddApi } from "@/api/user";
 
 import {
   productInfoApi,
-  treeListApi,
   productAddApi,
   generateAttrApi,
   productGetRuleApi,
@@ -503,14 +445,14 @@ export default {
       // dataLabel:[{"id":4,"value":4,"label_cate":0,"label_name":"啊啊啊","label":"啊啊啊","store_id":0,"type":1,"children":[{"id":10,"store_id":0,"label_cate":4,"label_name":"标签1","type":1,"label":"标签1","value":10},{"id":11,"store_id":0,"label_cate":4,"label_name":"标签2","type":1,"label":"标签2","value":11},{"id":12,"store_id":0,"label_cate":4,"label_name":"标签3","type":1,"label":"标签3","value":12}]},{"id":6,"value":6,"label_cate":0,"label_name":"0000","label":"0000","store_id":0,"type":1,"children":[{"id":13,"store_id":0,"label_cate":6,"label_name":"1111111","type":1,"label":"1111111","value":13},{"id":14,"store_id":0,"label_cate":6,"label_name":"2222222","type":1,"label":"2222222","value":14}]},{"id":5,"value":5,"label_cate":0,"label_name":"kk","label":"kk","store_id":0,"type":1,"children":[]}],
       headTab: [
         { tit: "基础信息", name: "1" },
-        { tit: "商品详情", name: "2" },
+        { tit: "景点详情", name: "2" },
      
       ],
       virtual: [
-        { tit: "普通商品", id: 0, tit2: "物流发货" },
+        { tit: "普通景点", id: 0, tit2: "物流发货" },
         { tit: "卡密/网盘", id: 1, tit2: "自动发货" },
         { tit: "优惠卷", id: 2, tit2: "自动发货" },
-        { tit: "虚拟商品", id: 3, tit2: "虚拟发货" },
+        { tit: "虚拟景点", id: 3, tit2: "虚拟发货" },
       ],
       seletVideo: 0, //选择视频类型
       customBtn: false, //自定义留言开关
@@ -522,7 +464,7 @@ export default {
       upload_type: "", //视频上传类型 1 本地上传 2 3 4 OSS上传
       uploadData: {}, // 上传参数
       header: {},
-
+     
       type: 0,
       modals: false,
       goods_modals: false,
@@ -604,7 +546,7 @@ export default {
           minWidth: 95,
         },
         {
-          title: "商品编号",
+          title: "景点编号",
           slot: "bar_code",
           align: "center",
           minWidth: 120,
@@ -661,13 +603,13 @@ export default {
           minWidth: 95,
         },
         {
-          title: "商品编号",
+          title: "景点编号",
           slot: "bar_code",
           align: "center",
           minWidth: 120,
         },
         {
-          title: "虚拟商品",
+          title: "虚拟景点",
           slot: "fictitious",
           align: "center",
           minWidth: 95,
@@ -751,24 +693,27 @@ export default {
       customess: {
         content: [],
       }, //自定义留言内容
-
+      lvyou_name:"",
       formValidate: {
+        clock_people:0,  //打卡人数
+        integral:0, //签到获得积分
+        image:"",
         disk_info: "", //卡密类型
         logistics: ["1"], //选择物流方式
         freight: 2, //运费设置
         postage: 0, //设置运费金额
-        recommend: [], //商品推荐
+        recommend: [], //景点推荐
         presale_day: 1, //预售发货时间-结束
-        presale: false, //预售商品开关
+        presale: false, //预售景点开关
         video_open: false, //视频按钮是否显示
         vip_product: false, //付费会员专属开关
         custom_form: [], //自定义留言
-        store_name: "",
+        lvyou_name: "",  //景点名称
         cate_id: [],
         label_id: [],
         keyword: "",
         unit_name: "",
-        store_info: "",
+        lvyou_info: "",
         image: "",
         recommend_image: "",
         slider_image: [],
@@ -854,36 +799,36 @@ export default {
       picTit: "",
       tableIndex: 0,
       ruleValidate: {
-        store_name: [
-          { required: true, message: "请输入商品名称", trigger: "blur" },
+        lvyou_name: [
+          { required: true, message: "请输入景点名称", trigger: "blur" },
         ],
         cate_id: [
           {
             required: true,
-            message: "请选择商品分类",
+            message: "请选择景点分类",
             trigger: "change",
             type: "array",
             min: "1",
           },
         ],
         unit_name: [{ required: true, message: "请输入单位", trigger: "blur" }],
-        // image: [{ required: true, message: "请上传商品图", trigger: "change" }],
+        // image: [{ required: true, message: "请上传景点图", trigger: "change" }],
         slider_image: [
           {
             required: true,
-            message: "请上传商品轮播图",
+            message: "请上传景点轮播图",
             type: "array",
             trigger: "change",
           },
         ],
         spec_type: [
-          { required: true, message: "请选择商品规格", trigger: "change" },
+          { required: true, message: "请选择景点规格", trigger: "change" },
         ],
         is_virtual: [
-          { required: true, message: "请选择商品类型", trigger: "change" },
+          { required: true, message: "请选择景点类型", trigger: "change" },
         ],
         selectRule: [
-          { required: true, message: "请选择商品规格属性", trigger: "change" },
+          { required: true, message: "请选择景点规格属性", trigger: "change" },
         ],
         temp_id: [
           {
@@ -980,11 +925,7 @@ export default {
     this.columns = this.columns2.slice(0, 8);
     this.getToken();
 
-    // this.columnsInstall = this.columns2.slice(0, 4).concat(this.columnsInstall);
-    // this.columnsInsta8 = this.columns2.slice(0, 4).concat(this.columnsInsta8);
-  },
-  mounted() {
-    if (this.$route.params.id !== "0" && this.$route.params.id) {
+   if (this.$route.params.id !== "0" && this.$route.params.id) {
       this.getInfo();
     } else if (this.$route.params.id === "0") {
       productCache()
@@ -1026,28 +967,7 @@ export default {
               this.customBtn = true;
             }
             this.virtualbtn(data.virtual_type, 1);
-            if (data.spec_type === 0) {
-              this.manyFormValidate = [];
-            } else {
-              this.createBnt = true;
-              this.oneFormValidate = [
-                {
-                  pic: data.image,
-                  price: 0,
-                  cost: 0,
-                  ot_price: 0,
-                  stock: 0,
-                  bar_code: "",
-                  weight: 0,
-                  volume: 0,
-                  brokerage: 0,
-                  brokerage_two: 0,
-                  vip_price: 0,
-                  virtual_list: [],
-                  coupon_id: 0,
-                },
-              ];
-            }
+ 
             this.spinShow = false;
           }
         })
@@ -1055,17 +975,20 @@ export default {
           this.$Message.error(err.msg);
         });
     }
+  },
+  mounted() {
+    
     if (this.$route.query.type) {
       this.modals = true;
       this.type = this.$route.query.type;
     } else {
       this.type = 0;
     }
-    this.goodsCategory();
-    this.productGetRule();
-    this.productGetTemplate();
+    // this.productGetRule();
+    // this.productGetTemplate();
     // this.userLabel();
     this.uploadType();
+
   },
   methods: {
     activeData(dataLabel) {
@@ -1128,7 +1051,7 @@ export default {
           this.headTab = [
             { tit: "基础信息", name: "1" },
             { tit: "规格库存", name: "2" },
-            { tit: "商品详情", name: "3" },
+            { tit: "景点详情", name: "3" },
             { tit: "物流设置", name: "4" },
             { tit: "营销设置", name: "5" },
             { tit: "其他设置", name: "6" },
@@ -1140,7 +1063,7 @@ export default {
           this.headTab = [
             { tit: "基础信息", name: "1" },
             { tit: "规格库存", name: "2" },
-            { tit: "商品详情", name: "3" },
+            { tit: "景点详情", name: "3" },
             // { tit: "物流设置", name: "4" },
             { tit: "营销设置", name: "4" },
             { tit: "其他设置", name: "5" },
@@ -1152,7 +1075,7 @@ export default {
           this.headTab = [
             { tit: "基础信息", name: "1" },
             { tit: "规格库存", name: "2" },
-            { tit: "商品详情", name: "3" },
+            { tit: "景点详情", name: "3" },
             // { tit: "物流设置", name: "4" },
             { tit: "营销设置", name: "4" },
             { tit: "其他设置", name: "5" },
@@ -1164,7 +1087,7 @@ export default {
           this.headTab = [
             { tit: "基础信息", name: "1" },
             { tit: "规格库存", name: "2" },
-            { tit: "商品详情", name: "3" },
+            { tit: "景点详情", name: "3" },
             // { tit: "物流设置", name: "4" },
             { tit: "营销设置", name: "4" },
             { tit: "其他设置", name: "5" },
@@ -1177,15 +1100,13 @@ export default {
           this.headTab = [
             { tit: "基础信息", name: "1" },
             { tit: "规格库存", name: "2" },
-            { tit: "商品详情", name: "3" },
+            { tit: "景点详情", name: "3" },
             { tit: "营销设置", name: "4" },
             { tit: "其他设置", name: "5" },
           ];
       }
     },
-    addCate() {
-      this.$modalForm(productCreateApi()).then(() => this.goodsCategory());
-    },
+   
     logisticsBtn(e) {
       this.formValidate.logistics = e;
     },
@@ -1249,61 +1170,7 @@ export default {
       });
     },
     infoData(data) {
-      let cate_id = data.cate_id.map(Number);
-      let label_id = data.label_id.map(Number);
-      this.attrs = data.items || [];
-      let ids = [];
-      data.coupons.map((item) => {
-        ids.push(item.id);
-      });
       this.formValidate = data;
-      this.seletVideo = data.seletVideo;
-      this.contents = data.description;
-      this.couponName = data.coupons;
-      this.formValidate.coupon_ids = ids;
-      this.updateIds = ids;
-      this.dataLabel = data.label_id;
-      this.updateName = data.coupons;
-      this.virtualbtn(data.virtual_type, 1);
-      this.formValidate.logistics = data.logistics || ["1"];
-      this.formValidate.custom_form = data.custom_form || [];
-      if (this.formValidate.custom_form.length != 0) {
-        this.customBtn = true;
-      }
-      this.formValidate.cate_id = cate_id;
-      // this.formValidate.label_id = label_id;
-      if (data.attr) {
-        this.oneFormValidate = [data.attr];
-      }
-      this.formValidate.header = [];
-      this.generate(0);
-      // this.manyFormValidate = data.attrs;
-      this.$set(this, "manyFormValidate", data.attrs);
-      this.spec_type = data.spec_type;
-      this.formValidate.is_virtual = data.is_virtual;
-      this.virtual[data.is_virtual].id = data.is_virtual;
-      if (data.spec_type === 0) {
-        this.manyFormValidate = [];
-      } else {
-        this.createBnt = true;
-        this.oneFormValidate = [
-          {
-            pic: "",
-            price: 0,
-            cost: 0,
-            ot_price: 0,
-            stock: 0,
-            bar_code: "",
-            weight: 0,
-            volume: 0,
-            brokerage: 0,
-            brokerage_two: 0,
-            vip_price: 0,
-            virtual_list: [],
-            coupon_id: 0,
-          },
-        ];
-      }
     },
     //关闭淘宝弹窗并生成数据；
     onClose(data) {
@@ -1644,7 +1511,7 @@ export default {
         }
       });
     },
-    // 获取商品属性模板；
+    // 获取景点属性模板；
     productGetRule() {
       productGetRuleApi().then((res) => {
         this.ruleList = res.data;
@@ -1742,7 +1609,7 @@ export default {
           let header = info.header;
           if ([1, 2].includes(this.formValidate.virtual_type)) {
             // let aaa = header.splice(7, 2, {
-            //   title: "虚拟商品",
+            //   title: "虚拟景点",
             //   slot: "fictitious",
             //   align: "center",
             //   minWidth: 95,
@@ -1829,15 +1696,9 @@ export default {
         this.$Message.warning("请添加属性");
       }
     },
-    // 商品分类；
+    // 景点分类；
     goodsCategory() {
-      treeListApi(1)
-        .then((res) => {
-          this.treeSelect = res.data;
-        })
-        .catch((res) => {
-          this.$Message.error(res.msg);
-        });
+      
     },
     // 用户标签
     // userLabel() {
@@ -1874,48 +1735,9 @@ export default {
       that.spinShow = true;
       productInfoApi(that.$route.params.id)
         .then(async (res) => {
-          let data = res.data.productInfo;
-          this.infoData(data);
-          // let cate_id = data.cate_id.map(Number);
-          // let label_id = data.label_id.map(Number);
-          // this.attrs = data.items || [];
-          // let ids = [];
-          // data.coupons.map((item) => {
-          //   ids.push(item.id);
-          // });
-          // that.formValidate = data;
-          // that.couponName = data.coupons;
-          // that.formValidate.coupon_ids = ids;
-          // that.updateIds = ids;
-          // that.updateName = data.coupons;
-          // that.formValidate.cate_id = cate_id;
-          // that.formValidate.label_id = label_id;
-          // that.oneFormValidate = [data.attr];
-          // that.formValidate.header = [];
-          // that.manyFormValidate = data.attrs;
-          // that.generate(0);
-          // that.spec_type = data.spec_type;
-          // if (data.spec_type === 0) {
-          //   that.manyFormValidate = [];
-          // } else {
-          //   that.createBnt = true;
-          //   that.oneFormValidate = [
-          //     {
-          //       pic: data.image,
-          //       price: 0,
-          //       cost: 0,
-          //       ot_price: 0,
-          //       stock: 0,
-          //       bar_code: "",
-          //       weight: 0,
-          //       volume: 0,
-          //       brokerage: 0,
-          //       brokerage_two: 0,
-          //       vip_price: 0,
-          //     },
-          //   ];
-          // }
-          this.spinShow = false;
+          let data =await res.data.productInfo;
+          that.infoData(data);
+          that.spinShow = false;
         })
         .catch((res) => {
           this.spinShow = false;
@@ -1935,7 +1757,7 @@ export default {
     changeCancel(msg) {
       this.modalPic = false;
     },
-    // 点击商品图
+    // 点击景点图
     modalPicTap(tit, picTit, index) {
       this.modalPic = true;
       this.isChoice = tit === "dan" ? "单选" : "多选";
@@ -1959,7 +1781,7 @@ export default {
           }
           break;
         case "danTable":
-          this.oneFormValidate[this.tableIndex].pic = pc.att_dir;
+          this.formValidate.image = pc.att_dir;
           break;
         case "duopi":
           this.oneFormBatch[this.tableIndex].pic = pc.att_dir;
@@ -1990,63 +1812,16 @@ export default {
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.formValidate.type = this.type;
-          if (this.formValidate.spec_type === 0) {
-            this.formValidate.attrs = this.oneFormValidate;
-            this.formValidate.header = [];
-            this.formValidate.items = [];
-            this.formValidate.is_copy = 0;
-          } else {
-            this.formValidate.items = this.attrs;
-            this.formValidate.attrs = this.manyFormValidate;
-            this.formValidate.is_copy = 1;
-          }
-          if (
-            this.formValidate.spec_type === 1 &&
-            this.manyFormValidate.length === 0
-          ) {
-            return this.$Message.warning("商品信息-请点击生成多规格");
-            // return this.$Message.warning('请点击生成规格！');
-          }
+         
           let item = this.formValidate.attrs;
-          if (this.formValidate.is_sub[0] === 1) {
-            for (let i = 0; i < item.length; i++) {
-              if (
-                item[i].brokerage === null ||
-                item[i].brokerage_two === null
-              ) {
-                return this.$Message.error("其他设置- 一二级返佣不能为空");
-              }
-            }
-          } else {
-            for (let i = 0; i < item.length; i++) {
-              if (item[i].vip_price === null) {
-                return this.$Message.error("其他设置-会员价不能为空");
-              }
-            }
-          }
-          if (this.formValidate.is_sub.length === 2) {
-            for (let i = 0; i < item.length; i++) {
-              if (
-                item[i].brokerage === null ||
-                item[i].brokerage_two === null ||
-                item[i].vip_price === null
-              ) {
-                return this.$Message.error(
-                  "其他设置- 一二级返佣和会员价不能为空"
-                );
-              }
-            }
-          }
-          if (this.formValidate.freight == 3 && !this.formValidate.temp_id) {
-            return this.$Message.warning("商品信息-运费模板不能为空");
-          }
+          
           let activeIds = [];
           this.dataLabel.forEach((item) => {
             activeIds.push(item.id);
           });
           this.formValidate.label_id = activeIds;
           this.openSubimit = true;
-          this.formValidate.description = this.formatRichText(this.content);
+          this.formValidate.description = this.formatRichText(this.formValidate.description);
           productAddApi(this.formValidate)
             .then(async (res) => {
               this.openSubimit = false;
@@ -2068,25 +1843,19 @@ export default {
               this.$Message.error(res.msg);
             });
         } else {
-          if (!this.formValidate.store_name) {
-            return this.$Message.warning("商品信息-商品名称不能为空");
+          if (!this.formValidate.lvyou_name) {
+            return this.$Message.warning("景点信息-景点名称不能为空");
           } else if (!this.formValidate.cate_id.length) {
-            return this.$Message.warning("商品信息-商品分类不能为空");
+            return this.$Message.warning("景点信息-景点分类不能为空");
           } else if (!this.formValidate.unit_name) {
-            return this.$Message.warning("商品信息-商品单位不能为空");
+            return this.$Message.warning("景点信息-景点单位不能为空");
           } else if (!this.formValidate.slider_image.length) {
-            return this.$Message.warning("商品信息-商品轮播图不能为空");
-          } else if (
+            return this.$Message.warning("景点信息-景点轮播图不能为空");
+          } else {
             !this.formValidate.temp_id &&
             this.formValidate.freight == 3
-          ) {
-            return this.$Message.warning("商品信息-运费模板不能为空");
           }
-          //    if(!this.formValidate.store_name || !this.formValidate.cate_id || !this.formValidate.keyword
-          //    || !this.formValidate.unit_name || !this.formValidate.store_info
-          //        || !this.formValidate.image || !this.formValidate.slider_image){
-          //        this.$Message.warning("请填写完整商品信息！");
-          //    }
+          
         }
       });
     },
@@ -2149,7 +1918,7 @@ export default {
       );
       return newContent;
     },
-    // 商品id
+    // 景点id
     getProductId(row) {
       this.goods_modals = false;
       let arr = this.formValidate.recommend_list.concat(row);

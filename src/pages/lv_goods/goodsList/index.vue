@@ -10,10 +10,10 @@
       >
         <Row type="flex" :gutter="24">
           <!-- <Col v-bind="grid">
-            <FormItem label="商品分类：" label-for="pid">
+            <FormItem label="景点分类：" label-for="pid">
               <Select
                 v-model="artFrom.cate_id"
-                placeholder="请选择商品分类"
+                placeholder="请选择景点分类"
                 clearable
                 @on-change="userSearchs"
               >
@@ -27,11 +27,11 @@
             </FormItem>
           </Col> -->
           <Col v-bind="grid">
-            <FormItem label="商品搜索：" label-for="store_name">
+            <FormItem label="景点搜索：" label-for="store_name">
               <Input
                 search
                 enter-button
-                placeholder="请输入商品名称/关键字/ID"
+                placeholder="请输入景点名称/关键字/ID"
                 v-model="artFrom.store_name"
                 @on-search="userSearchs"
               />
@@ -44,7 +44,7 @@
           v-auth="['product-product-save']"
           :to="'/admin/lv_product/add_product'"
           ><Button type="primary" class="bnt mr15" icon="md-add"
-            >添加商品</Button
+            >添加景点</Button
           ></router-link
         >
         <!-- <Button
@@ -52,7 +52,7 @@
           type="success"
           class="bnt mr15"
           @click="onCopy"
-          >商品采集</Button
+          >景点采集</Button
         > -->
         <!-- <Button
           v-auth="['product-product-product_show']"
@@ -150,7 +150,7 @@
     >
       <tao-bao ref="taobaos" v-if="modals" @on-close="onClose"></tao-bao>
     </Modal>
-    <!-- 商品弹窗 -->
+    <!-- 景点弹窗 -->
     <div v-if="isProductBox">
       <div class="bg" @click="isProductBox = false"></div>
       <goodsDetail :goodsId="goodsId"></goodsDetail>
@@ -167,10 +167,8 @@ import taoBao from "./taoBao";
 import goodsDetail from "./components/goodsDetail.vue";
 
 import {
-  getGoodHeade,
   getGoods,
   PostgoodsIsShow,
-  treeListApi,
   productShowApi,
   productUnshowApi,
   storeProductApi,
@@ -223,22 +221,22 @@ export default {
         //   align: "center",
         // },
         {
-          title: "商品ID",
+          title: "景点ID",
           key: "id",
           width: 80,
         },
         {
-          title: "商品图",
+          title: "景点图",
           slot: "image",
           minWidth: 120,
         },
         {
-          title: "商品名称",
+          title: "景点名称",
           key: "lvyou_name",
           minWidth: 250,
         },
         {
-          title: "商品描述",
+          title: "景点描述",
           key: "lvyou_info",
           minWidth: 100,
         },
@@ -302,8 +300,6 @@ export default {
   },
   created() {},
   activated() {
-    this.goodHeade();
-    this.goodsCategory();
     if (this.$route.fullPath === "/admin/product/product_list?type=5") {
       this.getPath();
     } else {
@@ -353,7 +349,7 @@ export default {
     // 批量上架
     onShelves() {
       if (this.ids.length === 0) {
-        this.$Message.warning("请选择要上架的商品");
+        this.$Message.warning("请选择要上架的景点");
       } else {
         let data = {
           ids: this.ids,
@@ -361,7 +357,6 @@ export default {
         productShowApi(data)
           .then((res) => {
             this.$Message.success(res.msg);
-            this.goodHeade();
             this.getDataList();
           })
           .catch((res) => {
@@ -372,7 +367,7 @@ export default {
     // 批量下架
     onDismount() {
       if (this.ids.length === 0) {
-        this.$Message.warning("请选择要下架的商品");
+        this.$Message.warning("请选择要下架的景点");
       } else {
         let data = {
           ids: this.ids,
@@ -381,7 +376,6 @@ export default {
           .then((res) => {
             this.$Message.success(res.msg);
             this.artFrom.page = 1;
-            this.goodHeade();
             this.getDataList();
           })
           .catch((res) => {
@@ -444,7 +438,7 @@ export default {
         }
       }
     },
-    // 添加淘宝商品成功
+    // 添加淘宝景点成功
     onClose() {
       this.modals = false;
     },
@@ -477,27 +471,9 @@ export default {
       this.artFrom.cate_id = value;
       this.getDataList();
     },
-    // 获取商品表单头数量
-    goodHeade() {
-      getGoodHeade()
-        .then((res) => {
-          this.headeNum = res.data.list;
-        })
-        .catch((res) => {
-          this.$Message.error(res.msg);
-        });
-    },
-    // 商品分类；
-    goodsCategory() {
-      treeListApi(1)
-        .then((res) => {
-          this.treeSelect = res.data;
-        })
-        .catch((res) => {
-          this.$Message.error(res.msg);
-        });
-    },
-    // 商品列表；
+    
+  
+    // 景点列表；
     getDataList() {
       this.loading = true;
       this.artFrom.cate_id = this.artFrom.cate_id || "";
@@ -542,9 +518,9 @@ export default {
     // 数据导出；
     exportData: function () {
       let th = [
-        "商品名称",
-        "商品简介",
-        "商品分类",
+        "景点名称",
+        "景点简介",
+        "景点分类",
         "价格",
         "库存",
         "销量",

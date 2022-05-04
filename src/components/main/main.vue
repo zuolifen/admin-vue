@@ -22,7 +22,7 @@
         <div class="logo-con">
           <!-- <img v-show="!collapsed" :src="maxLogo" key="max-logo" />
           <img v-show="collapsed" :src="minLogo" key="min-logo" /> -->
-          中诚旅游
+          旅游
         </div>
       </side-menu>
     </Sider>

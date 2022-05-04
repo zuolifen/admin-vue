@@ -12,8 +12,8 @@ export default {
   /**
    * @description 配置显示在浏览器标签的title
    */
-  // title: localStorage.getItem('ADMIN_TITLE') || '中诚旅游',
-  title: '中诚旅游',
+  // title: localStorage.getItem('ADMIN_TITLE') || '旅游',
+  title: '旅游',
   /**
    * @description token在Cookie中存储的天数，默认1天
    */

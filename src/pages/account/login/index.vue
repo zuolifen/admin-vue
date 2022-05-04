@@ -26,7 +26,7 @@
               alt="logo"
               style="width: 100%; height: 74px"
             /> -->
-            中诚旅游
+            旅游
           </div>
         </div>
         <Form

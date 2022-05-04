@@ -35,7 +35,7 @@ const frameIn = [
     {
         path: '/admin/',
         meta: {
-            title: '中诚旅游'
+            title: '旅游'
         },
         redirect: {
             name: 'home_index'

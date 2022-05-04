@@ -51,7 +51,7 @@
           </Col>
           <template v-if="collapse">
             <Col span="18">
-              <Col v-bind="grid">
+              <!-- <Col v-bind="grid">
                 <FormItem label="用户等级：" label-for="level">
                   <Select
                     v-model="level"
@@ -68,8 +68,8 @@
                     >
                   </Select>
                 </FormItem>
-              </Col>
-              <Col v-bind="grid">
+              </Col> -->
+              <!-- <Col v-bind="grid">
                 <FormItem label="用户分组：" label-for="group_id">
                   <Select
                     v-model="group_id"
@@ -86,8 +86,8 @@
                     >
                   </Select>
                 </FormItem>
-              </Col>
-              <Col v-bind="grid">
+              </Col> -->
+              <!-- <Col v-bind="grid">
                 <FormItem label="用户标签：" label-for="label_id">
                   <div
                     class="labelInput acea-row row-between-wrapper"
@@ -108,12 +108,12 @@
                     <div class="ivu-icon ivu-icon-ios-arrow-down"></div>
                   </div>
                 </FormItem>
-              </Col>
+              </Col> -->
             </Col>
             <Col span="18">
-              <Col v-bind="grid">
+              <!-- <Col v-bind="grid">
                 <FormItem label="付费会员：" label-for="isMember">
-                  <!-- <Select
+                  <Select
                     v-model="userFrom.isMember"
                     placeholder="请选择付费会员"
                     element-id="isMember"
@@ -122,7 +122,7 @@
                   >
                     <Option :value="1">是</Option>
                     <Option :value="0">否</Option>
-                  </Select> -->
+                  </Select>
                   <RadioGroup v-model="userFrom.isMember" type="button">
                     <Radio label="">
                       <span>全部</span>
@@ -135,8 +135,8 @@
                     </Radio>
                   </RadioGroup>
                 </FormItem>
-              </Col>
-              <Col v-bind="grid">
+              </Col> -->
+              <!-- <Col v-bind="grid">
                 <FormItem label="国家：" label-for="country">
                   <Select
                     v-model="userFrom.country"
@@ -149,8 +149,8 @@
                     <Option value="abroad">外国</Option>
                   </Select>
                 </FormItem>
-              </Col>
-              <Col v-bind="grid" v-if="userFrom.country === 'domestic'">
+              </Col> -->
+              <!-- <Col v-bind="grid" v-if="userFrom.country === 'domestic'">
                 <FormItem label="省份：">
                   <Cascader
                     :data="addresData"
@@ -159,9 +159,9 @@
                     @on-change="handleChange"
                   ></Cascader>
                 </FormItem>
-              </Col>
+              </Col> -->
             </Col>
-            <Col span="18">
+            <!-- <Col span="18">
               <Col v-bind="grid">
                 <FormItem label="性别：" label-for="sex">
                   <RadioGroup v-model="userFrom.sex" type="button">
@@ -195,8 +195,8 @@
                   </RadioGroup>
                 </FormItem>
               </Col>
-            </Col>
-            <Col span="18">
+            </Col> -->
+            <!-- <Col span="18">
               <Col v-bind="grid">
                 <FormItem label="访问情况：" label-for="user_time_type">
                   <Select
@@ -214,7 +214,7 @@
               </Col>
               <Col v-bind="grid" v-if="user_time_type">
                 <FormItem label="访问时间：" label-for="user_time">
-                  <!--<DatePicker clearable @on-change="onchangeTime" v-model="timeVal" :value="timeVal"  format="yyyy/MM/dd" type="daterange" placement="bottom-end" placeholder="选择时间" v-width="'100%'"></DatePicker>-->
+                  <DatePicker clearable @on-change="onchangeTime" v-model="timeVal" :value="timeVal"  format="yyyy/MM/dd" type="daterange" placement="bottom-end" placeholder="选择时间" v-width="'100%'"></DatePicker>
                   <DatePicker
                     :editable="false"
                     @on-change="onchangeTime"
@@ -229,8 +229,8 @@
                   ></DatePicker>
                 </FormItem>
               </Col>
-            </Col>
-            <Col span="18">
+            </Col> -->
+            <!-- <Col span="18">
               <Col v-bind="grid">
                 <FormItem label="下单次数：" label-for="pay_count">
                   <Select
@@ -249,7 +249,7 @@
                   </Select>
                 </FormItem>
               </Col>
-            </Col>
+            </Col> -->
           </template>
           <Col span="6" class="ivu-text-right userFrom">
             <FormItem>
@@ -264,12 +264,12 @@
               <Button class="ResetSearch" @click="reset('userFrom')"
                 >重置</Button
               >
-              <a class="ivu-ml-8 font14 ml10" @click="collapse = !collapse">
+              <!-- <a class="ivu-ml-8 font14 ml10" @click="collapse = !collapse">
                 <template v-if="!collapse">
                   展开 <Icon type="ios-arrow-down" />
                 </template>
                 <template v-else> 收起 <Icon type="ios-arrow-up" /> </template>
-              </a>
+              </a> -->
             </FormItem>
           </Col>
         </Row>
@@ -277,7 +277,7 @@
       <Divider dashed />
       <Row type="flex" justify="space-between" class="mt20">
         <Col span="24">
-          <Button
+          <!-- <Button
             v-auth="['admin-user-save']"
             type="primary"
             class="mr20"
@@ -308,7 +308,7 @@
             class="mr20"
             @click="setLabel"
             >批量设置标签</Button
-          >
+          > -->
 
           <!-- <Button v-auth="['admin-user-synchro']" class="mr20" @click="synchro">同步公众号用户</Button> -->
         </Col>
@@ -694,14 +694,14 @@ export default {
         ],
       },
       collapse: false,
-      headeNum: [
-        { type: "", name: "全部" },
-        { type: "wechat", name: "微信公众号" },
-        { type: "routine", name: "微信小程序" },
-        { type: "h5", name: "H5" },
-        { type: "pc", name: "PC" },
-        { type: "app", name: "APP" },
-      ],
+      // headeNum: [
+      //   { type: "", name: "全部" },
+      //   { type: "wechat", name: "微信公众号" },
+      //   { type: "routine", name: "微信小程序" },
+      //   { type: "h5", name: "H5" },
+      //   { type: "pc", name: "PC" },
+      //   { type: "app", name: "APP" },
+      // ],
       address: [],
       addresData: city,
       isShowSend: true,
@@ -815,17 +815,23 @@ export default {
           sortable: "custom",
           minWidth: 100,
         },
+        {
+          title: "打卡积分",
+          key: "lvyou_integral",
+          sortable: "custom",
+          minWidth: 100,
+        },
         // {
         //     title: '状态',
         //     slot: 'status',
         //     minWidth: 100
         // },
-        {
-          title: "操作",
-          slot: "action",
-          fixed: "right",
-          minWidth: 120,
-        },
+        // {
+        //   title: "操作",
+        //   slot: "action",
+        //   fixed: "right",
+        //   minWidth: 120,
+        // },
       ],
       userLists: [],
       FromData: null,

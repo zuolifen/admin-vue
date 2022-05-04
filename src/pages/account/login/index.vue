@@ -14,18 +14,19 @@
           v-for="(item, index) in swiperList"
           :key="index"
         >
-          <img :src="item.slide" />
+          <!-- <img :src="item.slide" /> -->
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
       <div class="index_from page-account-container from-wh">
         <div class="page-account-top">
           <div class="page-account-top-logo">
-            <img
+            <!-- <img
               :src="login_logo"
               alt="logo"
               style="width: 100%; height: 74px"
-            />
+            /> -->
+            中诚旅游
           </div>
         </div>
         <Form

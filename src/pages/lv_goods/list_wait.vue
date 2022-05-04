@@ -2,7 +2,7 @@
     <div class="article-manager">
         <div class="i-layout-page-header">
             <PageHeader
-                    title="景点管理"
+                    title="商品管理"
                     hidden-breadcrumb
                     :tab-list="tabList"
                     :tab-active-key="tabActiveKey"
@@ -12,10 +12,10 @@
         </div>
         <Card :bordered="false" dis-hover class="ivu-mt">
             <div class="acea-row row-middle">
-                <span>景点分类：</span>
+                <span>商品分类：</span>
                 <TreeSelect v-model="value" :data="treeSelect" style="width:160px;"/>
                 <div class="ivu-search acea-row row-middle">
-                    <div>景点搜索：</div>
+                    <div>商品搜索：</div>
                     <div class="ivu-mt ivu-mb" style="max-width:200px;">
                         <Input search size="default" enter-button placeholder="请输入"/>
                     </div>
@@ -159,17 +159,17 @@ export default {
           }
         },
         {
-          title: '景点ID',
+          title: '商品ID',
           slot: 'id',
           width: 100
         },
         {
-          title: '景点图',
+          title: '商品图',
           slot: 'image',
           minWidth: 80
         },
         {
-          title: '景点名称',
+          title: '商品名称',
           slot: 'name',
           minWidth: 250
         },
@@ -297,7 +297,7 @@ export default {
     // 数据导出；
     exportData: function () {
       this.$refs.table.exportCsv({
-        filename: '景点列表'
+        filename: '商品列表'
       })
     }
   }

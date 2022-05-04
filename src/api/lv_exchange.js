@@ -19,7 +19,14 @@ export function getGoodHeade () {
         method: 'get'
     })
 }
-
+//订单核销
+export function putWrite (data) {
+    return request({
+        url: '/lv_exchange/write',
+        method: 'post',
+        data: data
+    })
+}
 /*
  * 获取商品表单头数量；
  * */

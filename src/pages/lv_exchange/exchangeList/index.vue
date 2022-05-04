@@ -113,12 +113,21 @@
             <span slot="close">下架</span>
           </i-switch>
         </template>
-        <template slot-scope="{ row, index }" slot="action">
+        <template  slot="action">
         
           <a @click="edit(row)">编辑</a>
           <Divider type="vertical" />
         
-          <a @click="del(row, '移入回收站', index)" >删除</a>
+          <Button
+              v-auth="['order-write']"
+              type="success"
+              class="mr10 greens"
+              size="default"
+              @click="writeOff"
+            >
+              <Icon type="md-list"></Icon>
+              订单核销
+            </Button>
         </template>
       </Table>
       <div class="acea-row row-right page">
@@ -150,6 +159,39 @@
     >
       <tao-bao ref="taobaos" v-if="modals" @on-close="onClose"></tao-bao>
     </Modal>
+    <!--订单核销模态框-->
+    <Modal
+      v-model="modals2"
+      title="订单核销"
+      class="paymentFooter"
+      scrollable
+      width="400"
+    >
+      <Form
+        ref="writeOffFrom"
+        :model="writeOffFrom"
+        label-position="right"
+        class="tabform"
+        @submit.native.prevent
+      >
+        <FormItem prop="code" label-for="code">
+          <Input
+            search
+            enter-button="验证"
+            style="width: 100%"
+            type="text"
+            placeholder="请输入12位核销码"
+            @on-search="search('writeOffFrom')"
+            v-model.number="writeOffFrom.code"
+            number
+          />
+        </FormItem>
+      </Form>
+      <div slot="footer">
+        <Button type="primary" @click="ok('writeOffFrom')">立即核销</Button>
+        <Button @click="cancel('writeOffFrom')">取消</Button>
+      </div>
+    </Modal>
     <!-- 商品弹窗 -->
     <div v-if="isProductBox">
       <div class="bg" @click="isProductBox = false"></div>
@@ -172,6 +214,7 @@ import {
   productShowApi,
   productUnshowApi,
   storeProductApi,
+  putWrite
 } from "@/api/lv_exchange";
 export default {
   name: "lv_exchange_exchangeList",
@@ -183,6 +226,12 @@ export default {
     return {
       template: false,
       modals: false,
+      modals2: false,
+      writeOffFrom: {
+        code: "",
+        confirm: 0,
+      },
+     
       grid: {
         xl: 6,
         lg: 8,
@@ -198,6 +247,7 @@ export default {
         store_name: "",
         excel: 0,
       },
+      
       list: [],
       tableList: [],
       headeNum: [],
@@ -307,6 +357,60 @@ export default {
     }
   },
   methods: {
+     // 订单核销
+    writeOff() {
+      this.modals2 = true;
+    },
+     // 验证
+    search(name) {
+      this.$refs[name].validate((valid) => {
+        if (valid) {
+          this.writeOffFrom.confirm = 0;
+          putWrite(this.writeOffFrom)
+            .then(async (res) => {
+              if (res.status === 200) {
+                this.$Message.success(res.msg);
+                // this.modals2 = false
+                // this.$refs[name].resetFields()
+                // this.$emit('getList')
+              } else {
+                this.$Message.error(res.msg);
+              }
+            })
+            .catch((res) => {
+              this.$Message.error(res.msg);
+            });
+        } else {
+          this.$Message.error("请填写正确的核销码");
+        }
+      });
+    },
+     // 订单核销
+    ok(name) {
+      if (!this.writeOffFrom.code) {
+        this.$Message.warning("请先验证订单！");
+      } else {
+        this.writeOffFrom.confirm = 1;
+        putWrite(this.writeOffFrom)
+          .then(async (res) => {
+            if (res.status === 200) {
+              this.$Message.success(res.msg);
+              this.modals2 = false;
+              this.$refs[name].resetFields();
+              this.$emit("getList", 1);
+            } else {
+              this.$Message.error(res.msg);
+            }
+          })
+          .catch((res) => {
+            this.$Message.error(res.msg);
+          });
+      }
+    },
+     cancel(name) {
+      this.modals2 = false;
+      this.$refs[name].resetFields();
+    },
     look(row) {
       this.goodsId = row.id;
       this.isProductBox = true;

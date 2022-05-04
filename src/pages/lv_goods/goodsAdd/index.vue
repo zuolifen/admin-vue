@@ -313,22 +313,7 @@
         @getProductId="getProductId"
       ></goods-list>
     </Modal>
-    <!-- 用户标签 -->
-    <Modal
-      v-model="labelShow"
-      scrollable
-      title="请选择用户标签"
-      :closable="false"
-      width="500"
-      :footer-hide="true"
-      :mask-closable="false"
-    >
-      <userLabel
-        ref="userLabel"
-        @activeData="activeData"
-        @close="labelClose"
-      ></userLabel>
-    </Modal>
+    
   </div>
 </template>
 
@@ -656,7 +641,6 @@ export default {
         goods_info: "",
         image: "",
         recommend_image: "",
-        description: "",
         ficti: 0,
         give_integral: 0,
         sort: 0,
@@ -1696,16 +1680,12 @@ export default {
     // 提交
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
-        console.log(valid)
+        
         if (valid) {
           
           this.formValidate.type = this.type;
-         
-          
-          let activeIds = [];
-         
           this.openSubimit = true;
-          this.formValidate.description = this.formatRichText(this.formValidate.description);
+          console.log(valid)
           productAddApi(this.formValidate)
             .then(async (res) => {
               this.openSubimit = false;

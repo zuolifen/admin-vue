@@ -28,7 +28,7 @@ export default {
           href: 'http://doc.crmeb.com'
         }
       ],
-      copyright: 'Copyright © 2022 | 西安众邦网络科技有限公司'
+      // copyright: 'Copyright © 2022 | 西安众邦网络科技有限公司'
     }
   },
   mounted () {

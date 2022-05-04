@@ -79,7 +79,7 @@
             <!-- <router-view v-if="reload" style="min-height: 600px" /> -->
             <!--<ABackTop :height="100" :bottom="80" :right="50" container=".content-wrapper"></ABackTop>-->
           </Content>
-          <i-copyright />
+          <!-- <i-copyright /> -->
         </Layout>
       </Content>
     </Layout>
@@ -127,7 +127,7 @@ export default {
     ErrorStore,
     User,
     ABackTop,
-    iCopyright,
+    // iCopyright,
     HeaderSearch,
     HeaderNotice,
   },

@@ -115,8 +115,6 @@
         </template>
         <template  slot="action">
         
-          <a @click="edit(row)">编辑</a>
-          <Divider type="vertical" />
         
           <Button
               v-auth="['order-write']"
@@ -182,8 +180,7 @@
             type="text"
             placeholder="请输入12位核销码"
             @on-search="search('writeOffFrom')"
-            v-model.number="writeOffFrom.code"
-            number
+            v-model="writeOffFrom.code"
           />
         </FormItem>
       </Form>
@@ -295,6 +292,15 @@ export default {
           key: "goods_integral",
           minWidth: 80,
         },
+        {
+          title: "核销状态",
+          key:"status",
+          minWidth: 80,
+          render: (h, params) => {
+            return h("span", params.row.status?"已核销":"未核销",
+            );
+          },
+        },
       //   {
       //     title: "打卡人数",
       //     key: "clock_people",
@@ -370,9 +376,9 @@ export default {
             .then(async (res) => {
               if (res.status === 200) {
                 this.$Message.success(res.msg);
-                // this.modals2 = false
-                // this.$refs[name].resetFields()
-                // this.$emit('getList')
+                this.modals2 = false
+                this.$refs[name].resetFields()
+                this.$emit('getList')
               } else {
                 this.$Message.error(res.msg);
               }
@@ -384,6 +390,7 @@ export default {
           this.$Message.error("请填写正确的核销码");
         }
       });
+      this.getDataList()
     },
      // 订单核销
     ok(name) {
@@ -398,6 +405,7 @@ export default {
               this.modals2 = false;
               this.$refs[name].resetFields();
               this.$emit("getList", 1);
+              
             } else {
               this.$Message.error(res.msg);
             }
@@ -406,6 +414,7 @@ export default {
             this.$Message.error(res.msg);
           });
       }
+      this.getDataList()
     },
      cancel(name) {
       this.modals2 = false;
@@ -583,6 +592,7 @@ export default {
       this.artFrom.cate_id = this.artFrom.cate_id || "";
       getGoods(this.artFrom)
         .then((res) => {
+          
           let data = res.data;
           this.tableList = data.list;
           this.total = res.data.count;
